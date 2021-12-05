@@ -1,0 +1,32 @@
+This is giving Time exceeded because T.C is O(n) and Constraints were: 1 <= nums.length <= 10^5, we need to optimize our solution
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        for(int i=0; i<nums.size(); i++)
+        {
+            for(int j=i+1; j<nums.size(); j++)
+            if(nums[i] == nums[j])
+                return true;
+            break;
+        }
+        
+            return false;
+    }
+};
+_________________________________________________________________________________________________________
+here T.C - O(nlogn) coz of sorting, also if here we were taking i=0 compiler was giving Runtime error
+
+class Solution {
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        
+        for(int i=1; i<nums.size(); i++)
+        {
+            if(nums[i-1] == nums[i])
+                return true;
+        }
+        return false;
+    }
+};

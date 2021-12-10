@@ -16,3 +16,4 @@
 [8_Pascals Triangle](https://leetcode.com/problems/pascals-triangle/)
 [9_Valid Sudoku](https://leetcode.com/problems/valid-sudoku/)
 [10_Search in 2D array](https://leetcode.com/problems/search-a-2d-matrix/)
+[11_First Unique Character in a String](https://leetcode.com/problems/first-unique-character-in-a-string/)

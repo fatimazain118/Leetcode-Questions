@@ -1,0 +1,23 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_map<ListNode*,bool> Hashtable;
+        ListNode* temp = head;
+        
+        while(temp != NULL){
+            if(Hashtable.count(temp) != 0) //checking if temp already present in hashtable or not
+                return true;
+            Hashtable[temp] = true;   //else we insert that particular address into the hashtable
+            temp = temp->next;
+        }
+        return false;
+    }
+};

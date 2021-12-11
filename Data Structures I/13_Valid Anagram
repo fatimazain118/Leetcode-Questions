@@ -1,0 +1,22 @@
+//In ransomNote we just need to keep track of count but here length should also be equal 
+
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        vector<int> result(26,0);
+        for(int i=0; s[i] != '\0'; i++)
+        {
+result[s[i] - 'a'] += 1;
+        }
+        
+        for(int i=0; t[i] != '\0'; i++)
+        {
+            
+            if(s.size() != t.size() || result[t[i] - 'a'] == 0)
+                return false;
+            result[t[i] - 'a'] -=1;
+            
+        }
+        return true;
+    }
+};

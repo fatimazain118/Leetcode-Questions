@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool canConstruct(string ransomNote, string magazine) {
+      
+            vector<int> HashMagazine(26,0);
+        for(int i=0; magazine[i] != '\0'; i++)
+        {
+            HashMagazine[magazine[i] - 'a'] += 1;
+        }
+        
+        for(int i=0; ransomNote[i] != '\0'; i++)
+        {
+            if(HashMagazine[ransomNote[i] - 'a'] == 0)
+                return false;
+            HashMagazine[ransomNote[i] - 'a'] -= 1; 
+        }
+        return true;
+    }
+};

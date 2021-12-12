@@ -1,0 +1,16 @@
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* currptr = head;       //created a new pointer to scan the linkedlist
+        
+        while(currptr != NULL && currptr->next != NULL)
+        {
+            if(currptr->val == currptr->next->val)
+                currptr->next = currptr->next->next;
+            else
+                currptr = currptr->next;
+            
+        }
+        return head;
+    }
+};

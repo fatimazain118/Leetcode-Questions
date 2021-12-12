@@ -21,3 +21,4 @@
 [13_Valid Anagram](https://leetcode.com/problems/valid-anagram/)
 [14_Linked List cycle](https://leetcode.com/problems/linked-list-cycle/)
 [15_Merge Two Sorted linked list](https://leetcode.com/problems/merge-two-sorted-lists/)
+[16_Remove Linked List Elements](https://leetcode.com/problems/remove-linked-list-elements/)

@@ -32,4 +32,9 @@ public:
     }
 };
 
+T.C -- O(1) for push 
+       and O(1) amortized for pop
+       and O(N) for top
+       
+S.C -- O(2N)       
      

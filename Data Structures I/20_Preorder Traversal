@@ -1,0 +1,32 @@
+//Iterative way
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> preorder;
+        if(root == NULL) return preorder;
+        
+        stack<TreeNode*> stk;
+        stk.push(root);
+        
+        while(!stk.empty())        //checking stack is empty or not
+        {
+          preorder.push_back(root->val);  //push root  
+            if(root->right != NULL)
+            {
+                stk.push(root->right);  //push root->right's value first
+            }
+             if(root->left != NULL)
+             {
+                 stk.push(root->left);    //then left's value
+            }
+            
+            root = stk.top();     //pop top element
+            stk.pop();
+        }
+        return preorder;
+    }
+};
+
+T.C -- O(N) travelling entire tree
+S.C - O(N) when screwed tree

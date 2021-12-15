@@ -27,3 +27,4 @@
 [19_ Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
 [20_Preorder Traversal](https://leetcode.com/problems/binary-tree-preorder-traversal/)
 [21_Inorder Travrsal](https://leetcode.com/problems/binary-tree-inorder-traversal/)
+[22_Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/)

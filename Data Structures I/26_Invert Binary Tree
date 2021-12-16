@@ -1,0 +1,23 @@
+//creating the new tree need lot of space so here only changing the pointers of childer node
+class Solution {
+public:
+    void swap(TreeNode* curr)
+    {
+       if(curr == NULL) return;
+        swap(curr->left);   //calling left and right side of root node
+        swap(curr->right);
+        
+        //swapping the child pointers
+        TreeNode* temp=curr->left;
+            curr->left=curr->right;
+            curr->right=temp;
+    }
+    
+    TreeNode* invertTree(TreeNode* root) {
+        if(root == NULL) return root;
+        swap(root);
+        return root;
+    }
+};
+
+T.C - O(N) is worst case we are travelling each node 3 times

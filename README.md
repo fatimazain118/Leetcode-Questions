@@ -30,3 +30,4 @@
 [22_Postorder Traversal](https://leetcode.com/problems/binary-tree-postorder-traversal/)
 [23_Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
 [24_Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+[25_ Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)

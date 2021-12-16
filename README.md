@@ -32,3 +32,4 @@
 [24_Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
 [25_ Symmetric Tree](https://leetcode.com/problems/symmetric-tree/)
 [26_Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)
+[27_Path Sum](https://leetcode.com/problems/path-sum/)

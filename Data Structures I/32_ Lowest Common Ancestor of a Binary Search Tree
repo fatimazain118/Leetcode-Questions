@@ -1,0 +1,26 @@
+
+//Traversing each child nodes to search p and q when found return them 
+//node where we get from left and right our p and q return that node
+
+class Solution {
+public:
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+      if(root == NULL || root == p || root == q)
+          return root;
+        
+        TreeNode* left = lowestCommonAncestor(root->left, p, q);
+        TreeNode* right = lowestCommonAncestor(root->right, p, q);
+        
+        //result
+        if(left == NULL)
+            return right;
+        else if(right == NULL)
+            return left;
+        else
+            return root; //both left and right are not null, we found our result
+    }
+};
+
+T.C - O(N)
+S.C - O(N) auxillary
+

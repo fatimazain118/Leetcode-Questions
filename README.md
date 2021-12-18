@@ -35,3 +35,4 @@
 [27_Path Sum](https://leetcode.com/problems/path-sum/)
 [28_ Search in a Binary Search Tree](https://leetcode.com/problems/search-in-a-binary-search-tree/)
 [29_Insert into a Binary Search Tree](https://leetcode.com/problems/insert-into-a-binary-search-tree/)
+[30_ Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)

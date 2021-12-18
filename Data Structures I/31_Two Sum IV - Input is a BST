@@ -1,0 +1,54 @@
+class Solution {
+public:
+    
+    vector<int> v;
+    void inorder(TreeNode* root)
+    {
+        if(root == NULL) return;
+        inorder(root->left);
+        v.push_back(root->val);
+        inorder(root->right);
+    }
+    
+    bool findTarget(TreeNode* root, int k){
+        
+        //finding inorder traversal to get sorted vector
+    inorder(root);
+        
+        //using 2 pointer approach like two sum pblm
+        int left = 0;
+        int right = v.size() -1;
+        while(left<right)
+        {
+            if(v[left] + v[right] == k )return true;
+            else if(v[left] + v[right] < k) left++;
+            else
+                right--;
+        }
+        return false;
+    }
+};
+
+T.C - O(N) Travelling to all nodes
+S.C - O(N) for storing inorder traversal
+_________________________________________________________________________
+//This approach takes more time
+T.C - O(H)
+S.C - O(1)
+
+class Solution {
+public:
+    
+set<int> s;   //should be declare out not inside else give error
+    bool findTarget(TreeNode* root, int k){
+    
+        if(!root) return false;
+        
+        if(s.find(k-root->val) != s.end()) //fidind that the element is already present inside the set or not if it has                                                  //reaced end then means not present
+            return true;
+        s.insert(root->val);    //if not present in set insert
+        
+        return findTarget(root->left, k) || findTarget(root->right, k); 
+   
+    }
+};

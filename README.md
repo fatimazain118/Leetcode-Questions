@@ -38,3 +38,6 @@
 [30_ Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 [31_Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/)
 [32_ Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
+
+#String
+[1_Maximum Number of Words Found in Sentences](https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/)

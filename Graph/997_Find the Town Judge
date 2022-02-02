@@ -1,0 +1,43 @@
+//O(N)
+
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        vector<int> arr(n + 1, 0); // Define an array of length n+1
+        
+        for(int i = 0; i < trust.size(); i++){ // loop through the 'trust' array
+            arr[trust[i][0]]--; // if a given person trust someone then decrement the count of his index
+            arr[trust[i][1]]++; // increment the count of the index whom he trusts
+            
+        }
+        // In last, check the 'arr' array that if there is any index having count equals to n-1
+        for(int i = 1; i < arr.size(); i++){
+            if(arr[i] == n - 1) return i; // person doesnt trust anybody but everyone else trust him. Return their index
+        }
+        return -1;
+    }
+};
+
+___________________________________________
+
+class Solution {
+public:
+    int findJudge(int n, vector<vector<int>>& trust) {
+        //1st value of pair denotes how many he trustd
+        //2nd value of pair denotes how many trusts him
+        
+        vector<pair<int,int>> arr(n+1,{0,0});       //N+1 coz arrray indexing starts from 0
+        for(int i=0; i<trust.size(); i++){
+            arr[trust[i][0]].first +=1;
+            arr[trust[i][1]].second +=1;
+        }
+        
+        //Now find who is trusted by N-1 others and he/she do not trusts other
+        for(int i=1;i<=n;i++){
+            if(arr[i].first == 0 and arr[i].second == n-1){
+                return i;
+            }
+        }
+        return -1;
+    }
+};

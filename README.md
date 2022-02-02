@@ -40,4 +40,10 @@
 [32_ Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
 
 #String
+
 [1_Maximum Number of Words Found in Sentences](https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/)
+
+
+#Graph
+
+[997_Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/)

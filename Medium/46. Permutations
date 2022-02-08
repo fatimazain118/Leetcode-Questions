@@ -1,0 +1,23 @@
+class Solution {
+public:
+    void recPer(int index, vector<int> &nums, vector<vector<int>> &ans){        //taking index as a pointer to first element
+        if(index==nums.size()){                                              //when travelled entire array push in vector ans
+            ans.push_back(nums);
+            return;
+        }
+        
+        for(int i=index; i<nums.size(); i++){
+            swap(nums[index],nums[i]);
+            recPer(index+1,nums,ans);
+            swap(nums[index],nums[i]);                      //again swap so that original array is passed in backtracking
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> ans;
+        recPer(0,nums,ans);
+        return ans;
+    }
+};
+
+
+//T.C - O(N!*N) N! for permutations and N elements in array

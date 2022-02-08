@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>> ans;         //making vectors of vectors to store our pascal triangle
+        
+        for(int i=0; i<numRows; i++){
+            
+            vector<int> rows(i+1,1);         //making row vector in push in ans vector initialising with 1
+            
+             for(int j=1; j<i; j++){
+                 rows[j] = ans[i-1][j] + ans[i-1][j-1];
+             }
+            ans.push_back(rows);
+        }
+        return ans;
+    }
+};
+
+_____________________________________
+T.C - O(N^2)

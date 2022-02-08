@@ -47,3 +47,8 @@
 #Graph
 
 [997_Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/)
+
+
+#Striver Series
+
+[73. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)

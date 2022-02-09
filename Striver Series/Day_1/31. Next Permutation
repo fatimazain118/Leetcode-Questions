@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+       int n = nums.size();
+        int k, l;
+        for(k=n-2; k>=0; k--){         //finding the break point
+            if(nums[k] < nums[k+1]){
+                break;
+            }
+        }
+        
+        if(k < 0){                        //if break point is not found
+            reverse(nums.begin(), nums.end());     
+        }
+        else{                                 //break point found
+            for(l=n-1; l>k; l--){
+                if(nums[l] > nums[k]){         //finding next higest element
+                    break;
+                }
+            }
+            swap(nums[k], nums[l]);              // swap the break point with the next greater no.
+            reverse(nums.begin() + k + 1, nums.end());        //reverse after k+1 element
+        }
+    }
+};
+_________________________________________________
+/*
+Time Complexity: For the first iteration backward, the second interaction backward and reversal at the end takes O(N) for each, where N is the number of elements in the
+input array. This sums up to 3*O(N) which is approximately O(N).
+
+Space Complexity: Since no extra storage is required. Thus, its complexity is O(1).
+*/

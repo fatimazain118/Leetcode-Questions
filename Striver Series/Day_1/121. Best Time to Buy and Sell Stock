@@ -1,0 +1,60 @@
+Solution 1: Brute Force
+
+Intuition: We can simply use 2 loops and track every transaction and maintain a variable profit to contain the max value among all transactions.
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxProfit(vector<int> arr){
+    int profit= 0;
+
+    for(int i=0; i<arr.size()-1; i++){
+        for(int j=i; j<arr.size()-1; j++){
+            if(arr[j] > arr[i]){
+                profit = max(arr[j] - arr[i], profit);
+            }
+        }
+    }
+    return profit;
+}
+int main(){
+    vector<int> arr = {7,1,5,3,6,4};
+    
+    cout<<maxProfit(arr);
+    return 0;
+}
+
+Output:
+
+Max profit is: 5
+
+Time complexity: O(n^2)
+
+Space Complexity: O(1)
+_______________________________________________________________________________________________________________________________________________________
+Soltuion 2:Optimal solution 
+
+Intuition: We will linearly travel the array. We can maintain a minimum from the starting of the array and compare it with every element of the array, if it is greater
+than the minimum then take the difference and maintain it in max, otherwise update the minimum.
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int minPrize = prices[0];
+        int profit = 0;
+        for(int i = 0; i<prices.size(); i++)
+        {
+            minPrize = min(prices[i], minPrize);
+            profit = max(profit, prices[i] - minPrize);    
+        }
+        return profit;
+    }  
+};
+
+Output: Max profit is: 5
+
+Time complexity: O(n)
+
+Space Complexity: O(1)
+
+

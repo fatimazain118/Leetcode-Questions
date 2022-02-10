@@ -59,3 +59,4 @@
 [118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
 [31. Next Permutation](https://leetcode.com/problems/next-permutation/)
 [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+[121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)

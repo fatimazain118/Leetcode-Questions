@@ -1,0 +1,98 @@
+//Solution 1: Sorting ( even if it is not the expected solution here but it can be considered as one of the approach ). Since the array contains only 3 integers, 0, 1, and 2. Simply sorting the array would arrange the elements in increasing order.
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        for(int i=0; i<nums.size(); i++){
+            sort(nums.begin(), nums.end());
+        }
+    }
+};
+____________________________________
+Time Complexity: O(N*logN)
+
+Space Complexity: O(1)
+
+________________________________________
+Solution 2: Keeping count of values (Counting Sort)
+
+Intuition: Since in this case there are only 3 distinct values in the array so it’s easy to maintain the count of all, Like the count of 0, 1, and 2. This can be followed by overwriting the array based on the frequency(count) of the values.
+
+Approach: 
+
+Take 3 variables to maintain the count of 0, 1 and 2.
+Travel the array once and increment the corresponding counting variables
+( let’s consider count_0 = a, count_1 = b, count_2 = c )
+
+In 2nd traversal of array, we will now over write the first ‘a’ indices / positions in array with ’0’, the next ‘b’ with ‘1’ and the remaining ‘c’ with ‘2’.
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+        int count_0 = 0;
+        int count_1 = 0;
+        int count_2 = 0;
+        
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i]==0){
+                count_0++;
+            }
+            else if(nums[i]==1){
+                count_1++;
+            }
+            else{
+                count_2++;
+            }
+        }
+        
+        for(int i=0; i<count_0; i++){
+            nums[i] = 0;
+        }
+         for(int i=count_0; i<count_1+count_0; i++){
+            nums[i] = 1;
+        }
+         for(int i=count_0+count_1; i<nums.size(); i++){
+            nums[i] = 2;
+        }
+    }
+};
+
+
+Time Complexity: O(N) + O(N)
+
+Space Complexity: O(1)
+__________________________________________________________________
+
+//Optimized
+
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+       int low = 0;
+        int mid = 0;
+        int high = nums.size()-1;
+        
+       while(mid <= high){
+           switch(nums[mid]){
+                   
+                //if element is 0
+               case 0:
+                   swap(nums[low++], nums[mid++]);
+                   break;
+                   
+               case 1:
+                   mid++;
+                   break;
+                   
+               case 2:
+                   swap(nums[mid], nums[high--]);
+                   break;
+           }
+       }
+    }
+};
+____________________________________________________________________
+Time Complexity: O(N)
+
+Space Complexity: O(1)
+

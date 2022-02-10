@@ -1,0 +1,110 @@
+Solution 1: Brute force
+
+Approach: First check whether the array is sorted or not.If not sort the array. Now linearly iterate over the array and then check for all of its next intervals whether they are overlapping with the interval at the current index. Take a new data structure and insert the overlapped interval. If while iterating if the interval lies in the interval present in the data structure simply continue and move to the next interval.
+
+Code:
+
+// Merge Intervals
+
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<pair<int,int>> merge(vector<pair<int,int>>& intervals){
+     int n = intervals.size();
+     
+     //if not sort do so
+     sort(intervals.begin(), intervals.end());
+     
+     vector<pair<int,int>> ans;
+     for(int i=0; i<n; i++){
+        int start = intervals[i].first;
+        int end = intervals[i].second;
+      
+      //since the intervals already lies in the data structure leave it and continue
+
+      if(!ans.empty()){
+         if(start <= ans.back().second){     //last element ka second part
+             continue;
+         }
+      }
+
+      for(int j = i+1; j<n; j++){
+          if(intervals[j].first <= end){    //first element overlap
+              end = intervals[j].second;
+          }
+      }
+      ans.push_back({start,end});
+     }
+     return ans;
+}
+int main(){
+    vector<pair<int,int>> arr;
+    arr = {{1,3},{2,4},{2,6},{8,9},{8,10},{9,11},{15,18},{16,17}};
+
+    vector<pair<int,int>> ans = merge(arr);
+    cout<<"Merged Overlapping Intervals are : "<<endl;
+
+    for(auto it : ans){
+        cout<<it.first<<" "<<it.second << endl;
+    }
+    return 0;
+}
+
+Merged Overlapping Intervals are
+1 6
+8 11
+15 17
+
+Time Complexity: O(NlogN)+O(N*N). O(NlogN) for sorting the array, and O(N*N) because we are checking to the right for each index which is a nested loop.
+
+Space Complexity: O(N), as we are using a separate data structure.
+___________________________________________________________________________________________________________
+
+Solution 2: Optimal approach
+
+Approach: Linearly iterate over the array, and store the the first pair in curr vector, then iterate for the next elements ans check the first element of intervals is less then
+current last element if so means overlapping is there update the curr and move ahead
+
+Intuition: Since we have sorted the intervals, the intervals which will be merging are bound to be adjacent. We kept on merging simultaneously as we were traversing 
+through the array and when the element was non-overlapping we simply inserted the element in our data structure.
+
+Code:
+
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> merge(vector<vector<int>> &intervals){
+    sort(intervals.begin(), intervals.end());
+    
+    vector<int> curr = intervals[0];
+    vector<vector<int>> res;
+
+    for(int i=1; i<intervals.size(); i++){
+        if(curr[1]<intervals[i][0]){
+            res.push_back(curr);
+            curr = intervals[i];            //updating the curr to compare it with the next element of intervals vector
+        }
+        else{
+            curr[1] = max(curr[1],intervals[i][1]);
+        }
+    }
+    res.push_back(curr);
+    return res;
+}
+int main(){
+    vector<vector<int>> arr;
+    arr = {{1, 3}, {2, 4}, {2, 6}, {8, 9}, {8, 10}, {9, 11}, {15, 18}, {16, 17}};
+
+    vector<vector<int>> ans = merge(arr);
+
+    cout<<"Merged Overlapping Intervals are : "<< endl;
+
+    for(auto it : ans){
+        cout<<it[0] <<" "<<it[1]<<endl;
+    }
+return 0;
+}
+
+//Time Complexity: O(NlogN) + O(N). O(NlogN) for sorting and O(N) for traversing through the array.
+
+//Space Complexity: O(N) to return the answer of the merged intervals.

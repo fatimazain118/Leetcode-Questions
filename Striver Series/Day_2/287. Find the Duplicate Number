@@ -1,0 +1,30 @@
+Intuition: Since there is a duplicate number, we can always say that cycle will be formed.
+
+//The slow pointer moves by one step and the fast pointer moves by 2 steps and there exists a cycle so the first collision is bound to happen.
+//Now we place a fast pointer to start
+//so now fast and slow pointer both should move by one step
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+       int slow = nums[0];
+        int fast = nums[0];
+        
+        do{
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        while(slow != fast);
+        
+        fast = nums[0];
+        while(slow!=fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+   }
+};
+
+Time complexity: O(N). Since we traversed through the array only once.
+
+Space complexity: O(1).

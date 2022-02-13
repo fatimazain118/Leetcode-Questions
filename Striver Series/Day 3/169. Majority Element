@@ -1,0 +1,70 @@
+Approach 1: 
+
+1. Use a hashmap and store as (key,value) pairs. (Can also use frequency array based on size of nums) 
+2. Here the key will be the element of the array and value will be the number of times it occurs. 
+3. Traverse the array and update the value of the key. Simultaneously check if the value is greater than floor of N/2. 
+      If yes, return the key 
+      Else iterate forward.
+      
+Time Complexity: O(N)-> Frequency array or O(N log N) -> HashMap 
+
+Space Complexity: O(N)
+
+*Code*
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+        unordered_map<int,int> m;
+        
+        for(int i=0; i<n; i++){
+            
+            m[nums[i]]++;
+            if(m[nums[i]] > n/2){
+                return nums[i];
+            }
+        }
+        return 0;
+    }
+};
+____________________________________________________________________________
+Solution 3 (Optimal):
+
+Moore’s Voting Algorithm : 
+Approach: 
+
+1. Initialize 2 variables: 
+    Count –  for tracking the count of element
+    Element – for which element we are counting
+2. Traverse through nums array.
+      i) If Count is 0 then initialize the current traversing integer of array as Element 
+      ii) If the traversing integer of array and Element are same increase Count by 1
+      iii) If they are different decrease Count by 1
+3. The integer present in Element is the result we are expecting
+
+Code :
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+       int count =0;
+       int element = 0;
+        
+        for(int num : nums){
+            if(count == 0){
+                element = num;
+            }
+            if(num == element){
+                count++;
+            }
+            else{
+                count--;
+            }
+        }
+        return element;
+    }
+};
+
+Time Complexity: O(N)
+
+Space Complexity: O(1)

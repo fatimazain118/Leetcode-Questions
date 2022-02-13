@@ -1,0 +1,78 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+      int n = nums.size();
+        unordered_map<int,int> m;
+        vector<int> ans;
+        
+        for(int i=0; i<n; i++){
+            m[nums[i]]++;
+        
+        if(m[nums[i]] > n/3)
+            ans.push_back(nums[i]);
+        }
+        return ans;
+    }
+};
+
+Time Complexity: O(n)
+
+Space Complexity: O(n)
+_____________________________________________________________________________________________________________________________________________________
+Approach + Intuition: In our code, we start with declaring a few variables:
+
+1. num1 and num2 will store our currently most frequent and second most frequent element.
+2. c1 and c2 will store their frequency relatively to other numbers.
+3. We are sure that there will be a max of 2 elements which occurs > N/3 times because there cannot be if you do a simple math addition.
+4. In the last step, we will run a loop to check if num1 or nums2 are the majority elements or not by running a for loop check.
+
+if ele == num1, so we increment c1.
+if ele == num2, so we increment c2.
+if c1 is 0, so we assign num1 = ele.
+if c2 is 0, so we assign num2 = ele.
+In all the other cases we decrease both c1 and c2.
+
+Code : 
+ class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+      int n = nums.size();
+      int num1 = -1, num2 = -1, count1 = 0, count2 = 0;
+        
+        for(int i=0; i<n; i++){
+            if(nums[i] ==num1){
+                count1++;
+            }
+            else if(nums[i] == num2){
+                count2++;
+            }
+            else if(count1 == 0){
+                num1 = nums[i];
+                count1 = 1;
+            }
+            else if(count2 == 0){
+                num2 = nums[i];
+                count2 = 1;
+            }
+            else{
+                count1--;
+                count2--;
+            }
+        }
+        vector<int> ans;
+        count1 = count2 = 0;
+        
+        for(int i=0; i<n; i++){
+            if(nums[i] == num1)  count1++;
+            else if(nums[i] ==  num2)   count2++;
+        }
+        if(count1 > n/3)  ans.push_back(num1);
+        if(count2 > n/3)  ans.push_back(num2);
+        
+        return ans;
+    }
+};
+
+Time Complexity: O(n)
+
+Space Complexity: O(1)

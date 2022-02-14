@@ -1,0 +1,86 @@
+// Grid Unique Path
+// Recursive
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int uniquePath(int i, int j, int m, int n){
+        if(i==(m-1)&&j==(n-1)){
+            return 1;
+        }
+        if(i>=m || j>=n)  return 0;
+        else{
+            return uniquePath(i+1,j,m,n) + uniquePath(i,j+1,m,n);
+        }
+    }
+    int uniquePaths(int m, int n) {
+        return uniquePath(0,0,m,n); 
+    }
+};
+
+int main(){
+    Solution obj;
+    int totalWays = obj.uniquePaths(3,7);
+    cout<<totalWays<<endl;
+    return 0;
+}
+
+Time Complexity: The time comp[lexity of this recursive solution is exponential.
+
+Space Complexity: As we are using stack space for recursion so the space complexity will also be exponential.
+________________________________________________________________
+
+Solution 2: Dynamic Programming Solution
+
+class Solution {
+public:
+    int uniquePath(int i, int j, int m, int n, vector<vector<int>> &dp){
+        if(i==(m-1)&&j==(n-1)){
+            return 1;
+        }
+        if(i>=m || j>=n){
+            return 0;
+        }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        else{
+            return dp[i][j] = uniquePath(i+1,j,m,n,dp) + uniquePath(i,j+1,m,n,dp);
+        }
+    }
+    int uniquePaths(int m, int n) {
+        vector<vector<int>> dp(m+1,vector<int>(n+1,-1));
+        int num = uniquePath(0,0,m,n,dp); 
+        
+        if(m==1&&n==1)  return num;
+        return dp[0][0];
+    }
+    
+};
+
+Time Complexity: The time complexity of this solution will be O(n*m) because at max there can be n*m number of states.
+
+Space Complexity: As we are using extra space for the dummy matrix the space complexity will also be O(n*m).
+________________________________________________________________________
+Solution 3: Combinatorics Solution
+
+class Solution {
+public:
+    int uniquePaths(int m, int n){
+      int N = n+m-2;
+      int r = m-1;
+        double res = 1;
+        
+        for(int i=1; i<=r; i++){
+            res = res*(N-r+i)/i;
+        }
+        return (int)res;
+    }
+};
+
+Time Complexity: The time complexity of this solution will be O(n-1) or  O(m-1) depending on the formula we are using.
+
+Space Complexity: As we are not using any extra space the space complexity of the solution will be  O(1).
+

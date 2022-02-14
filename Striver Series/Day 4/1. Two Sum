@@ -1,0 +1,50 @@
+Time Complexity: O(N2)
+
+Space Complexity: O(1)
+
+Code :
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> result;
+        
+        for(int i=0; i<nums.size(); i++)
+            
+        {
+          for(int j=i+1; j<nums.size(); j++)
+       if((nums[i] + nums[j]) == target)
+{
+    result.push_back(i);
+    result.push_back(j);
+            
+        }
+      }
+        return result;
+    }
+};
+_______________________________________________________________________________________________________________________________________________
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> result;
+       unordered_map<int,int> s;
+        
+        
+        for(int i=0; i<nums.size(); i++){
+              int x = target - nums[i];
+            
+            if(s.find(x) != s.end()){                                        //if element is already present in the hashtable
+            result.push_back(s.find(target-nums[i])->second);               //hash me jo index store krri hai
+            //result.push_back(s[x]);
+            result.push_back(i);                                    //output that index that matches with the element in hash table
+        }
+            s[nums[i]] = i;                                         //if not present in hashtable store it(insertion)
+    }
+        return result;
+    }
+};
+
+Time Complexity: O(N)
+
+Space Complexity: O(N)

@@ -1,0 +1,61 @@
+Solution 2: Optimised  Approach 1
+
+Approach: We will have two pointers left and right. Pointer ‘left’ is used for maintaining the starting point of substring while ‘right’ will maintain the endpoint of the substring.’ right’ pointer will move forward and check for the duplicate occurrence of the current element if found then ‘left’ pointer will be shifted ahead so as to delete the duplicate elements.
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int ans = INT_MIN;
+        int left = 0;
+         if(s.empty()){
+                    return 0;
+                }
+         unordered_set<int> set;
+                    
+        for(int r=0; r<s.length(); r++){
+            
+          if(set.find(s[r]) != set.end()){
+                    while(left<r && set.find(s[r]) != set.end()){
+                    set.erase(s[left]);
+                    left++;
+                 }
+            }
+                set.insert(s[r]);
+            ans = max(ans, r-left+1);
+            }
+        return ans;
+    }
+};
+
+Time Complexity: O( 2*N ) (sometimes left and right both have to travel complete array)
+
+Space Complexity: O(N) where N is the size of HashSet taken for storing the elements
+____________________________________________________________________________________________________
+
+Solution 3: Optimised  Approach 2
+
+Approach: In this approach, we will make a map that will take care of counting the elements and maintaining the frequency of each and every element as a unity by taking the latest index of every element.
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        vector<int> map(256, -1);
+        
+        int left = 0, right = 0;
+        int n = s.size();
+        int len = 0;
+        while(right < n){
+            if(map[s[right]] != -1){    //exist
+                left = max(map[s[right]]+1, left);
+            }
+            map[s[right]] = right;   //update in map
+            len = max(len, right-left+1);
+            right++;
+        }
+        return len;
+    }
+};
+
+Time Complexity: O( N )
+
+Space Complexity: O(N) where N represents the size of HashSet where we are storing our elements

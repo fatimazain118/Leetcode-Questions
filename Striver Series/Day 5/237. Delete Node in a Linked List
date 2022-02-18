@@ -1,0 +1,14 @@
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        node->val = node->next->val;             //coping the next node value to it
+        node->next = node->next->next;           //deleting the next node
+        return;
+    }
+};
+
+Time Complexity: O(1)
+
+Reason: It is a two-step process that can be obtained in constant time.
+
+Space Complexity: O(1)

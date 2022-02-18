@@ -1,0 +1,57 @@
+Solution 1: Naive Approach [Traverse 2 times]
+
+Intuition: We can traverse through the Linked List while maintaining a count of nodes, let’s say in variable count , and then traversing for the 2nd time for (n – count) nodes to get to the nth node of the list.
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* curr = head;
+        int totalNode = 0;
+        
+        while(curr != NULL){
+          curr = curr->next;
+            totalNode++;
+        }
+        if(totalNode == n){
+            return head->next;
+      }
+        
+        curr = head;
+        for(int i=0; i<totalNode-n-1; i++){
+             curr = curr->next;
+        }
+            curr->next = curr->next->next;
+        return head;
+    }
+};
+____________________________________________________________________________________
+Solution 2: [Efficient] Two pointer method
+
+Unlike the above approach, we don’t have to maintain the count value, we can find the nth node just by one traversal by using two pointer approach.
+
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+      ListNode* start = new ListNode();
+        start->next = head;
+        ListNode* slow = start;
+        ListNode* fast = start;
+        
+        for(int i=1; i<=n; i++){
+            fast = fast->next;
+        }
+        
+        while(fast->next != NULL){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        
+        slow->next = slow->next->next;
+        
+        return start->next;
+    }
+};
+
+Time Complexity: O(N)
+
+Space Complexity: O(1)

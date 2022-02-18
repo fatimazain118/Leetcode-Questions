@@ -37,16 +37,16 @@ public:
         ListNode* slow = start;
         ListNode* fast = start;
         
-        for(int i=1; i<=n; i++){
+        for(int i=1; i<=n; i++){        //till n we'll run
             fast = fast->next;
         }
         
-        while(fast->next != NULL){
+        while(fast->next != NULL){            //then came both move by 1 step
             fast = fast->next;
             slow = slow->next;
         }
         
-        slow->next = slow->next->next;
+        slow->next = slow->next->next;       //coz slow next node we have to delete
         
         return start->next;
     }

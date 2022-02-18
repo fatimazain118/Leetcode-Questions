@@ -1,0 +1,52 @@
+Iterative
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* preptr = NULL;
+        ListNode* currptr = head;
+         
+        while(currptr != NULL){
+            ListNode* nextptr= currptr->next;
+            
+            currptr->next = preptr;  //reversing pointer
+            preptr = currptr;
+            currptr = nextptr;
+            }
+       return preptr;
+     }
+};
+
+Time Complexity:
+
+Since we are iterating only once through the list and achieving reversed list. Thus, the time complexity is O(N) where N is the number of nodes present in the list.
+
+Space Complexity:
+
+To perform given tasks, no external spaces are used except three-pointers. So, space complexity is O(1).
+___________________________________________________________________________________________________________________
+
+Recursive
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* &head) {
+       if(head == NULL or head->next == NULL){
+           return head;
+       }
+        
+        ListNode* n = reverseList(head->next);
+        head->next->next = head;
+        head->next = NULL;
+        return n;
+     }
+};
+
+Time Complexity:
+
+We move to the end of the list and achieve our reversed list. Thus, the time complexity is O(N) where N represents the number of nodes.
+
+Space Complexity:
+
+Apart from recursion using stack space, no external storage is used. Thus, space complexity is O(1).
+

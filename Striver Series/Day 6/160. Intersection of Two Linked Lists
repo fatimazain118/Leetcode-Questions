@@ -1,0 +1,142 @@
+Solution 1: Brute-Force
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        while(headB != NULL){
+         ListNode* temp = headA;
+            while(temp != NULL){           //temp will be iterating
+            if(temp == headB)  return headB;     //when ever the the first node matches
+            temp = temp->next;
+        }
+            headB = headB->next;
+        }
+        return NULL;
+    }
+};
+
+Time Complexity: O(m*n)
+
+Reason: For each node in list 2 entire lists 1 are iterated. 
+
+Space Complexity: O(1)
+
+Reason: No extra space is used.
+________________________________________________________________________
+Solution 2: Hashing
+
+Approach:
+
+Can we improve brute-force time complexity? In brute force, we are basically performing “searching”. We can also perform searches by Hashing. Taking into consideration that hashing process takes O(1) time complexity.
+
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+       unordered_set<ListNode*> s;
+        
+        while(headA != NULL){
+            s.insert(headA);         //storing the address of each node in A
+            headA = headA->next;
+        }
+        
+        while(headB != NULL){
+            if(s.find(headB) != s.end())  return headB;
+            headB = headB->next;
+        }
+        return NULL;
+    }
+};
+
+Time Complexity: O(n+m)
+
+Reason: Iterating through list 1 first takes O(n), then iterating through list 2 takes O(m). 
+
+Space Complexity: O(n)
+
+Reason: Storing list 1 node addresses in unordered_set.
+_______________________________________________________________________________________________________
+Solution 3: Difference of length
+
+Approach:
+
+We will reduce the search length. This can be done by searching the length of the shorter linked list. How? Let’s see the process.
+
+Find length of both the lists.
+Find the positive difference of these lengths.
+Move the dummy pointer of the larger list by difference achieved. This makes our search length reduced to the smaller list length.
+Move both pointers, each pointing two lists, ahead simultaneously if both do not collide.
+
+Code:
+
+int getDifference(node* head1,node* head2) {
+     int len1 = 0,len2 = 0;
+        while(head1 != NULL || head2 != NULL) {
+            if(head1 != NULL) {
+                ++len1; head1 = head1->next;
+            }
+            if(head2 != NULL) {
+                ++len2; head2 = head2->next;
+            }
+            
+        }
+        return len1-len2;//if difference is neg-> length of list2 > length of list1 else vice-versa
+}
+
+//utility function to check presence of intersection
+node* intersectionPresent(node* head1,node* head2) {
+ int diff = getDifference(head1,head2);
+        if(diff < 0) 
+            while(diff++ != 0) head2 = head2->next; 
+        else while(diff-- != 0) head1 = head1->next;
+        while(head1 != NULL) {
+            if(head1 == head2) return head1;
+            head2 = head2->next;
+            head1 = head1->next;
+        }
+        return head1;
+    }
+    
+    Time Complexity:
+
+O(2max(length of list1,length of list2))+O(abs(length of list1-length of list2))+O(min(length of list1,length of list2))
+
+Reason: Finding the length of both lists takes max(length of list1, length of list2) because it is found simultaneously for both of them. Moving the head pointer ahead by a difference of them. The next one is for searching.
+
+Space Complexity: O(1)
+
+Reason: No extra space is used.
+ _______________________________________________________________________________________________
+ Solution 4: Optimised 
+
+Approach:
+
+The difference of length method requires various steps to work on it. Using the same concept of difference of length, a different approach can be implemented. The process is as follows:-
+
+Take two dummy nodes for each list. Point each to the head of the lists.
+Iterate over them. If anyone becomes null, point them to the head of the opposite lists and continue iterating until they collide.
+
+Code:
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+     if(headA == NULL || headB == NULL) return NULL;
+        
+        ListNode* a = headA;
+        ListNode* b = headB;
+        
+        while(a!=b){
+           a = a==NULL ? headB : a->next;  // when a is NULL assign it to opposite list head else do next
+           b = b==NULL ? headA : b->next;       //iterating both simultaneously
+        }
+        return a;
+    }
+};
+
+Time Complexity: O(2*max(length of list1,length of list2))
+
+Reason: Uses the same concept of difference of lengths of two lists.
+
+Space Complexity: O(1)
+
+Reason: No extra data structure is used
+ 

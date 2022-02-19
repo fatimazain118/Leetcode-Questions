@@ -1,0 +1,54 @@
+Solution: Hashing
+Code:
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        unordered_map<ListNode*,bool> Hashtable;
+        ListNode* temp = head;
+        
+        while(temp != NULL){
+            if(Hashtable.count(temp) != 0) //checking if temp already present in hashtable or not
+                return true;
+            Hashtable[temp] = true;   //else we insert that particular address into the hashtable
+            temp = temp->next;
+        }
+        return false;
+    }
+};
+
+Time Complexity: O(N)
+
+Reason: Entire list is iterated once.
+
+Space Complexity: O(N)
+
+Reason: All nodes present in the list are stored in a hash table.
+________________________________________________________________________________________________
+Solution: Slow and Faster Pointer
+Code:
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+       if(head == NULL || head->next == NULL)  return false;
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast->next && fast->next->next){
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+
+Time Complexity: O(N)
+
+Reason: In the worst case, all the nodes of the list are visited.
+
+Space Complexity: O(1)
+
+Reason: No extra data structure is used.

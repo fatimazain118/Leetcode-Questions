@@ -1,0 +1,41 @@
+//new video
+
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        int count = 0;
+        ListNode* dummy = new ListNode();
+        dummy->next = head;
+        
+        ListNode* temp = dummy;
+        
+        while(temp->next != NULL)      
+        {
+            temp = temp->next;
+            count++;
+        }
+        temp = dummy;        //coz he have moved end of LL to find count
+        while(temp->next != NULL){
+            if(count<k)break;
+            int node =k-1;
+            ListNode* tempnext = temp->next;
+            ListNode* first = temp->next;
+            ListNode* second = first->next; 
+            
+            while(node-- > 0)               //running the loop for 3 times when k=3 so that why taking k-1  
+            {
+                ListNode* next = second->next;
+                second->next = first;
+                first = second;
+                second = next; 
+                
+                }
+            count -=k;
+            temp->next = first;
+            tempnext->next = second;
+            temp = tempnext;
+            
+        }
+        return dummy->next;
+    }
+};

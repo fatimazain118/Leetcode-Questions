@@ -1,0 +1,79 @@
+Solution: Using the extra data structure
+
+Approach:
+
+We can store elements in an array. Then check if the given array is a palindrome.
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+       vector<int> arr;
+        while(head != NULL){
+            arr.push_back(head->val);
+            head = head->next;
+        }
+        for(int i=0; i<arr.size()/2; i++){
+            if(arr[i] != arr[arr.size()-i-1])
+                return false;
+        }
+        return true;
+    }
+};
+
+Time Complexity: O(N)
+
+Reason: Iterating through the list to store elements in the array.
+
+Space Complexity: O(N)
+
+Reason: Using an array to store list elements for further computations.
+____________________________________________________________________________________________________________
+Solution 2: Optimized Solution
+
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+     if(head == NULL || head->next == NULL)  return true;
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast->next != NULL && fast->next->next != NULL){      //finding middle element
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        
+        slow->next = reverseList(slow->next);        //reversing list from middle's next
+        slow = slow->next;
+        
+        while(slow != NULL){                               //after reversing comparing the list
+            if(head->val != slow->val)   return false;
+            
+            head = head->next;
+            slow = slow->next;
+        }
+        return true;
+    }
+    
+    ListNode* reverseList(ListNode* head){
+        ListNode* pre = NULL;
+        ListNode* next = NULL;
+        
+        while(head!=NULL){
+            next = head->next;
+            head->next = pre;
+            
+            pre = head;
+            head = next;
+        }
+        return pre;
+    }
+};
+
+Time Complexity: O(N/2)+O(N/2)+O(N/2)
+
+Reason: O(N/2) for finding the middle element, reversing the list from the middle element, and traversing again to find palindrome respectively.
+
+Space Complexity: O(1)
+
+Reason: No extra data structures are used.

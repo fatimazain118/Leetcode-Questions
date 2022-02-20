@@ -1,0 +1,63 @@
+Solution 1: Brute Force
+
+Approach:
+
+We can store nodes in a hash table so that, if a loop exists, the head will encounter the same node again. This node will be present in the table and hence, we can detect the loop.
+Code:
+
+class Solution {
+public :
+    ListNode* detectCycle(ListNode *head) 
+    {     
+     unordered_set<ListNode*> s;
+        while(head!=NULL){
+            if(s.find(head) != s.end())   return head;
+            s.insert(head);
+            head = head->next;
+        }
+        return NULL;
+    }
+};
+
+Time Complexity: O(N)
+
+Reason: Iterating the entire list once.
+
+Space Complexity: O(N)
+
+Reason: We store all nodes in a hash table.
+______________________________________________________________________________________________________________________________________________________
+Solution 2: Slow and Fast Pointer Method
+
+class Solution {
+public :
+    ListNode* detectCycle(ListNode *head) 
+    {
+        ListNode* fast =head;
+        ListNode* slow = head;
+        
+        while(fast != NULL && fast->next != NULL)
+        {
+            slow=slow->next;
+            fast= fast->next->next;
+            if(slow==fast)           
+            {   
+                slow=head; 
+                    while(slow!=fast)
+                    {
+                        slow=slow->next;
+                        fast=fast->next;
+                    }
+                        return slow; 
+                  }
+               }
+         return NULL;
+    }
+};
+Time Complexity: O(N)
+
+Reason: We can take overall iterations club it to O(N)
+
+Space Complexity: O(1)
+
+Reason: No extra data structure is used.

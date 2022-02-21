@@ -1,0 +1,24 @@
+Approach:  We maintain a variable count that keeps a track of the number of consecutive 1’s while traversing the array. The other variable max_count maintains the maximum 
+number of 1’s, in other words, it maintains the answer.
+
+class Solution {
+public:
+    int findMaxConsecutiveOnes(vector<int>& nums) {
+        int count = 0;
+        int maxi = 0;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] == 1){
+                count++;
+            }
+                else{
+                    count = 0;
+                }
+            maxi = max(count, maxi);
+        }
+        return maxi;
+    }
+};
+
+Time Complexity: O(N) since the solution involves only a single pass.
+
+Space Complexity: O(1) because no extra space is used.

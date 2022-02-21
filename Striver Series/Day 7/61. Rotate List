@@ -1,0 +1,68 @@
+Solution: Brute Force
+
+Approach:
+
+We have to move the last element to first for each k.
+
+For each k, find the last element from the list. Move it to the first.
+
+Code :
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head==NULL || head->next==NULL)  return head;
+        
+        for(int i=0; i<k; i++){
+            ListNode* temp = head;
+            while(temp->next->next != NULL)   temp = temp->next;
+            ListNode* end = temp->next;
+            temp->next = NULL;
+            end->next = head;
+            head = end;
+        }
+        return head;
+    }
+};
+
+Time Complexity: O(Number of nodes present in the list*k)   //for large value of input it can give TIME EXCEEDED error
+
+Reason: For k times, we are iterating through the entire list to get the last element and move it to first.
+
+Space Complexity: O(1)
+
+Reason: No extra data structures is used for computations
+__________________________________________________________________________________________________
+Solution: Optimal Solution
+
+Code:
+
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+       if(!head || !head->next || k==0)  return head;
+        
+        ListNode* curr = head;
+        int len = 1;
+        while(curr->next  && len++)  curr = curr->next;
+        
+        curr->next = head;
+        k = k%len; 
+        k = len - k;
+        
+        while(k--) curr = curr->next;
+        
+        head = curr->next;
+        curr->next = NULL;
+        
+        return head;
+    }
+};
+
+Time Complexity: O(length of list) + O(length of list – (length of list%k))
+
+Reason: O(length of the list) for calculating the length of the list. O(length of the list – (length of list%k)) for breaking link.
+
+Space Complexity: O(1)
+
+Reason: No extra data structure is used for computation.

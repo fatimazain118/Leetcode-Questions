@@ -1,0 +1,32 @@
+ static bool cmp(pair<int,int>a, pair<int,int>b){
+        return (b.second>a.second);
+    }
+    
+    int maxMeetings(int start[], int end[], int n)
+    {
+        int count = 1;
+      vector<pair<int,int>> meet;
+      for(int i=0; i<n; i++){
+          pair<int,int>p(start[i],end[i]);
+          meet.push_back(p);
+      }
+    
+    sort(meet.begin(),meet.end(),cmp);
+    
+    int j = meet[0].second;
+    
+    for(int i=1;i<n; i++){
+        if(meet[i].first > j){
+            j = meet[i].second;
+            count++;
+        }
+    }
+    return count;
+ }
+ 
+ Time Complexity: O(n) to iterate through every position and insert them in a data structure. O(n log n)  to sort the data structure in ascending order of end time. O(n) 
+ to iterate through the positions and check which meeting can be performed.
+
+Overall : O(n) +O(n log n) + O(n) ~O(n log n)
+
+Space Complexity: O(n)  since we used an additional data structure for storing the start time, end time, 

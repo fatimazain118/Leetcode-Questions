@@ -1,0 +1,27 @@
+int findPlatform(int arr[], int dep[], int n)
+    {
+       sort(arr, arr+n);
+       sort(dep, dep+n);
+       
+       int plat_needed = 1, res = 1;
+       int i=1, j=0;
+       
+       while(i<n && j<n){
+           if(arr[i] <= dep[j]){
+               plat_needed++;
+               i++;
+           }
+           else if(arr[i] > dep[j]){
+               plat_needed--;
+               j++;
+           }
+           
+           if(plat_needed > res)  res = plat_needed;
+       }
+       return res;
+    }
+    
+Time Complexity: O(nlogn) Sorting takes O(nlogn) and traversal of arrays takes O(n) so overall time complexity is O(nlogn).
+
+Space complexity: O(1)  (No extra space used).
+    

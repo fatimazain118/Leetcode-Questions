@@ -1,0 +1,101 @@
+Solution 1: Brute force
+
+Approach: For each index, we have to find the amount of water that can be stored and we have to sum it up.If we observe carefully the amount the water stored at a particular
+index is the minimum of maximum elevation to the left and right of the index minus the elevation at that index.
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int waterTrapped = 0;
+        
+        for(int i=0; i<n; i++){
+            int j=i;
+            int leftMax = 0;
+            int rightMax = 0;
+            while(j>=0){
+                leftMax = max(leftMax, height[j]);
+                j--;
+            }
+            
+            j=i;
+            while(j<n){
+                rightMax = max(rightMax, height[j]);
+                j++;
+            }
+            waterTrapped += min(leftMax, rightMax) - height[i];
+        }
+        return waterTrapped;
+    }
+};
+
+Time Complexity: O(N*N) as for each index we are calculating leftMax and rightMax so it is a nested loop.
+//It can give Time exceeded error
+
+Space Complexity: O(1).
+_____________________________________________________________________________________________________________
+Solution 2:Better solution
+
+Intuition: We are taking O(N) for computing leftMax and rightMax at each index. The complexity can be boiled down to O(1) if we precompute the leftMax and rightMax at each index.
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int prefix[n];
+        int suffix[n];
+        prefix[0] = height[0];
+        
+        for(int i=1; i<n; i++){
+            prefix[i] = max(prefix[i-1], height[i]);
+        }
+        
+        suffix[n-1] = height[n-1];
+        for(int i=n-2; i>=0; i--){
+            suffix[i] = max(suffix[i+1], height[i]);
+        }
+        
+        int waterTrapped = 0;
+        for(int i=0; i<n; i++){
+            waterTrapped += min(prefix[i], suffix[i]) - height[i];
+        }
+        return waterTrapped;
+    }
+};
+
+Time Complexity:O(3*N) as we are traversing through the array only once. And O(2*N) for computing prefix and suffix array.
+
+Space Complexity:O(N)+O(N) for prefix and suffix arrays.
+___________________________________________________________________________________________________________________________
+Solution 3:Optimal Solution(Two pointer approach)
+
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        int left = 0;
+        int right = n-1;
+        int res = 0;
+        int maxleft = 0, maxright = 0;
+        
+        while(left <= right){
+            if(height[left] <= height[right]){
+                if(height[left]>=maxleft)  maxleft = height[left];
+                else  res += maxleft-height[left];
+                
+                left++;
+            }
+            else{
+                if(height[right] >= maxright)  maxright = height[right];
+                else res += maxright-height[right];
+                
+                right--;
+            }
+        }
+        return res;
+    }
+};
+
+Time Complexity: O(N) because we are using 2 pointer approach.
+
+Space Complexity: O(1) because we are not using anything extra.

@@ -1,0 +1,74 @@
+class Solution {
+public:
+    
+    void findCombinations(int idx, int target, vector<int> &arr, set<vector<int>> &ans, vector<int> &ds){
+        if(idx == arr.size()){
+            if(target == 0){
+                ans.insert(ds);
+            }
+            return;
+        }
+        
+        if(arr[idx] <= target){
+            ds.push_back(arr[idx]);
+            findCombinations(idx+1, target-arr[idx], arr, ans, ds);
+            ds.pop_back();
+        }
+        findCombinations(idx+1, target, arr, ans, ds);
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        set<vector<int>> ans;
+        vector<vector<int>> res;
+        vector<int> ds;
+        
+        findCombinations(0, target, candidates, ans, ds);
+        
+        for(auto it=ans.begin(); it!=ans.end(); it++){
+            res.push_back(*it);
+        }
+        return res;
+    }
+};
+
+//Time limit exceeded
+//T.C - 2^t * Klog(set size)
+______________________________________________________________________________________________________
+Using extra space and time complexity 
+
+Code :
+
+class Solution {
+public:
+    
+    void findCombinations(int idx, int target, vector<int> &arr, vector<vector<int>> &ans, vector<int> &ds){
+      if(target == 0){
+          ans.push_back(ds);
+          return;
+      }
+        for(int i = idx; i<arr.size(); i++){
+            if(i>idx && arr[i]==arr[i-1])  continue;
+            if(arr[i] > target)  break;
+            ds.push_back(arr[i]);
+            findCombinations(i+1, target-arr[i], arr, ans, ds);
+            ds.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(), candidates.end());
+        vector<vector<int>> res;
+        vector<int> ds;
+        
+        findCombinations(0, target, candidates, res, ds);
+        return res;
+    }
+};
+
+
+Time Complexity:O(2^n*k)
+
+Reason: Assume if all the elements in the array are unique then the no. of subsequence you will get will be O(2^n). we also add the ds to our ans when we reach the base case that will take “k”//average space for the ds.
+
+Space Complexity:O(k*x)
+
+Reason: if we have x combinations then space will be x*k where k is the average length of the combination.

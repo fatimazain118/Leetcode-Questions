@@ -1,3 +1,5 @@
+//for brute force go to day10 pblm 1
+
 class Solution {
 public:
     string getPermutation(int n, int k) {

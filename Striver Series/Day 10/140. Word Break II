@@ -1,0 +1,46 @@
+class Solution {
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        vector<string> result;
+        
+        for(string w : wordDict){
+            if(s.substr(0, w.length()) == w){            //substr from 0 idx to w.length
+                if(w.length() == s.length())
+                    result.push_back(w);             //first word store hogya
+                else{
+                      vector<string> temp = wordBreak(s.substr(w.length()), wordDict);          //here next call from w.length till last(as 2nd parameter is not given)
+                         for(string t : temp){
+                             result.push_back(w + " " + t);             //append first and secound word
+                         }
+                }
+            }
+        }
+        return result;
+    }
+};
+
+//TLE
+_______________________________________________________________________________________________
+class Solution {
+public:
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        vector<string> result;
+        unordered_map<string, vector<string>> dp;
+        
+        if(dp.find(s) != dp.end())  return dp[s];
+        
+        for(string w : wordDict){
+            if(s.substr(0, w.length()) == w){
+                if(w.length() == s.length())
+                    result.push_back(w);
+                else{
+                      vector<string> temp = wordBreak(s.substr(w.length()), wordDict);
+                         for(string t : temp){
+                             result.push_back(w + " " + t);
+                         }
+                }
+            }
+        }
+        return dp[s] = result;
+    }
+};

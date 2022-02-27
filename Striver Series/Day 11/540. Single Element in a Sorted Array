@@ -1,0 +1,67 @@
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+        unordered_map<int,int> m;
+        int ans;
+        
+        for(int i=0; i<nums.size(); i++){
+             m[nums[i]]++;
+        }
+        
+        for(int i=0; i<nums.size(); i++){
+            if(m[nums[i]] == 1){
+                ans = nums[i];
+            }
+        }
+        return ans;
+    }
+};
+
+//T.C - O(N)
+//S.C - O(N)
+_________________________________________________________________
+Soluton 2:
+// Using XOR
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+      int n = nums.size();
+      int ans = 0;
+        
+        for(int i=0; i<n; i++){
+            ans = ans^nums[i];
+        }
+        return ans;
+    }
+};
+
+//T.C - O(N)
+//S.C - O(1)
+____________________________________________________________________________
+Solution 3 :
+//using binary search
+
+class Solution {
+public:
+    int singleNonDuplicate(vector<int>& nums) {
+      int low = 0, high = nums.size()-2;
+        
+        while(low <= high){
+            int mid = (low + high)/2;
+            if(nums[mid] == nums[mid^1])  //taking xor will give next even or odd number
+            {
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return nums[low];
+    } 
+};
+
+//T.C - O(logn)
+//S.C - O(1)
+//First Instance -> Even idx
+//Second Instance -> Odd idx

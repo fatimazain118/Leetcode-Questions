@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int ans;
+        for(int i=0; i<nums.size(); i++){
+            if(nums[i] == target)
+                ans = i;
+        }
+        return ans;
+    }
+};
+
+//T.C - O(N)
+_______________________________________________________
+//Using Binary Search
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+       int low = 0, high = nums.size()-1;
+        
+        while(low <= high){
+            int mid = (low + high)/2;
+            if(nums[mid] == target)  return mid;
+            
+            //check left is sorted
+            if(nums[low] <= nums[mid]){
+                if(target >= nums[low] && target <= nums[mid]){
+                    high = mid-1;
+                }
+                else{
+                    low = mid+1;
+                }
+            }
+            //checking for right half is sorted or not
+            else{
+                if(target >= nums[mid] && target <= nums[high]){
+                    low = mid+1;
+                }
+                else{
+                    high = mid-1;
+                }
+            }
+        }
+        return -1;
+    }
+};
+
+//T.c - O(logn)
+//S.c - O(1)

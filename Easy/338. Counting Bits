@@ -1,0 +1,41 @@
+//O(n* logn) -by alisha
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+        vector<int> ans(n+1,0);
+    
+    for(int i=0; i<=n; i++){
+        int num = i;
+         int count = 0;
+        
+        while(num){
+            count += num%2;   //if least significant bit is 1(even) add to count
+            num /= 2;          //remove that
+        }
+        ans[i] = count;
+    }
+    return ans;
+ }
+};
+____________________________________________________
+
+//O(N) in single pass (DP)
+
+class Solution {
+public:
+    vector<int> countBits(int n) {
+      vector<int> ans;
+        ans.push_back(0);
+        
+        for(int i=1; i<n+1; i++){
+            if(i%2 != 0){
+                ans.push_back(ans[i/2] + 1);
+            }
+            else{
+                ans.push_back(ans[i/2]);
+            }
+        }
+        return ans;
+    }
+};

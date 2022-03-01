@@ -1,0 +1,35 @@
+//Power Set: Print all the possible subsequences of the String
+
+Solution 1: Using bit manipulation
+
+Approach: Prerequisites: To check whether the ith bit is set or not.If n&(1<<i) != 0,then the ith bit is set.
+First, write down all the numbers from 0 to 2^(n)-1 and their bit representation.0 means I am not picking the character in my subsequence, and 1 means I am picking the character.
+
+Basically, we traverse from 0 to 2^(n)-1 and check for every number if their bit is set or not. If the bit is set add that character to your subsequence.
+
+code:
+
+	vector<string> AllPossibleStrings(string s){
+		   vector<string> ans;
+		   int n = s.size();
+		   
+		   for(int num=0; num <(1<< n); num++){         // (2^n-1) --->  (1<<n)  1 left shift n   
+		        string sub = "";
+		        for(int j=0; j<n; j++){
+		            if(num & (1<<j)){                //to find ith bit is present or not
+		                sub += s[j];
+		            }
+		        }
+		        if(sub.length() > 0){
+		            ans.push_back(sub);
+		        }
+		   }
+		   sort(ans.begin(), ans.end());
+		   return ans;
+		}
+    
+    Time Complexity: O(2^n * n)
+
+Reason: O(2^n) for the outer for loop and O(n) for the inner for loop.
+
+Space Complexity: O(1)

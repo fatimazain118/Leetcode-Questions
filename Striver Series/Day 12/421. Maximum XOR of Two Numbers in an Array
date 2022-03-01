@@ -1,0 +1,81 @@
+struct Node{
+    Node* links[2];
+    
+    bool containsKey(int key){
+        return (links[key] != NULL);
+    }
+    
+    Node *get(int key){
+        return links[key];
+    }
+    
+    void put(int key, Node *node){
+        links[key] = node;
+    }
+};
+
+class Tries{
+    private :
+     Node* root;
+    
+    public :
+     Tries(){
+         root = new Node();
+     }
+    
+    public :
+     void insert(int num){
+         Node * node = root;
+         for(int i=31; i>=0; i--){
+             int bit = (num >> i) & 1;
+             
+             if(!node->containsKey(bit)){
+                 node->put(bit, new Node());
+             }
+             node = node->get(bit);
+         }
+     }
+    
+    public:
+       int findMax(int num){
+           Node* node = root;
+           
+           int maxNum = 0;
+           for(int i=31; i>=0; i--){
+               int bit = (num >> i) & 1;
+               if(node->containsKey(!bit)){
+                   maxNum = maxNum | (1<<i);   //to add 1 to maxNum
+                   node = node->get(!bit);     //go to that bit
+               }
+               
+               else{
+                  node = node->get(bit);    //if not goto opposite take that only
+               }
+           }
+           return maxNum;
+       }
+};
+
+class Solution {
+public:
+    int findMaximumXOR(vector<int>& nums) {
+        Tries trie;
+        for(int i=0; i<nums.size(); i++){
+            trie.insert(nums[i]);
+        }
+        int maxi = 0;
+        for(auto &it : nums){
+            maxi = max(maxi, trie.findMax(it));
+        }
+        return maxi;
+    }
+};
+
+
+Time Complexity: O(N*32) + O(M*32)
+
+Reason: For inserting all the elements of arr1 into the trie take O(N*32) [32 Bit] and O(M*32) for finding the maxXOR for every element of arr2.
+
+Space Complexity: O(N*32)
+
+Reason: Since we are inserting all the elements of arr1 into trie where every element is of size 32 bit but the space complexity will be less than O(N*32) because they might have overlapped.

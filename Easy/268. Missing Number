@@ -1,0 +1,44 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+    int ans;
+    sort(nums.begin(),nums.end());
+    for(int i=0;i<nums.size();i++)
+    {
+        if(nums[i]!=i)
+        {
+            ans=i;
+            break;
+        }
+    }
+    return ans;
+    }
+};
+_____________________________________________________________
+//This can leads to overflow sometimes
+
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        
+       return n*(n+1)*0.5 - accumulate(nums.begin(), nums.end(),0);    //This function returns the sum of all the values lying in a range between [first, last) with the variable sum
+    }
+};
+___________________________________________________________________________
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n = nums.size();
+        int ans =0;
+        
+        for(int i=0; i<n; i++){
+            ans ^= (nums[i]^i);
+        }
+        ans^=n;
+        return ans;
+    }
+};
+
+
+  

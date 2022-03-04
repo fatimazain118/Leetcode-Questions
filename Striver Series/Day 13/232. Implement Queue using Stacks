@@ -1,0 +1,36 @@
+class MyQueue {
+public:
+    stack<int> input, output;  //taking two stacks
+    MyQueue() {
+        
+    }
+      /** Push element x to the back of queue. */
+    void push(int x) {
+        input.push(x);
+    }
+    
+    int pop() {                 //from output stack
+        if(output.empty())
+            while(input.size())
+                output.push(input.top()), input.pop();            //O(N)
+        int x = output.top();
+        output.pop();
+        return x;
+    }
+
+    /** Get the front element. */
+   int peek() {                          //from output stack
+              if(output.empty())
+            while(input.size())
+                output.push(input.top()), input.pop();             //O(N)
+       return output.top();
+    }
+    
+    /** Returns whether the queue is empty. */
+    bool empty() {
+        return input.empty() && output.empty();
+    }
+};
+
+//It's amortized O(1) T.C as only in few instances it takes O(N) not in all cases you have to transfer all elements
+//S.C - O(2N)

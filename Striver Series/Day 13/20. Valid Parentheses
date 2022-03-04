@@ -1,0 +1,49 @@
+class Solution {
+public:
+    bool isValid(string s) {
+//         stack<char> stk;
+//         int len = s.length();
+        
+//         for(int i=0; i<len; i++)
+//         {
+//             if(s[i] == '(' || s[i] =='{' || s[i] == '[')
+//                 stk.push(s[i]);
+//             else
+//                 if(s[i] ==')' || s[i] =='}' || s[i] ==']')
+//                 {
+//                     if(stk.empty())         //before poping check if stack is not empty
+//                         return false;
+//                     else if(s[i] ==')' && stk.top() != '(' )   //Checking if stack top is same as that of string element
+//                         return false;
+//                      else if(s[i] =='}' && stk.top() != '{' )
+//                         return false;
+//                      else if(s[i] ==']' && stk.top() != '[' )
+//                         return false;
+                    
+//                    else
+//                        stk.pop();          //if same pop that
+//         }
+//         }
+//             if(stk.empty())     //after all push pop operation check stack becomes empty or not
+//                 return true;
+//             else
+//                 return false;
+         stack<char>st; 
+        for(auto it: s) {
+            if(it=='(' || it=='{' || it == '[') st.push(it); 
+            else {
+                if(st.size() == 0) return false; 
+                char ch = st.top(); 
+                st.pop(); 
+                if((it == ')' and ch == '(') or  (it == ']' and ch == '[') or (it == '}' and ch == '{'));
+                else return false;
+            }
+        }
+        return st.empty(); 
+    
+    }
+};
+
+Time Complexity: O(N)
+
+Space Complexity: O(N)

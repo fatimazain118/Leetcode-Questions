@@ -1,12 +1,4 @@
 # Leetcode-Questions
-#Easy
-
-[1_Find Target Indices After Sorting Array](https://leetcode.com/problems/find-target-indices-after-sorting-array/)
-[2_Build Array by Permutation](https://leetcode.com/problems/build-array-from-permutation/)
-
-#Medium
-
-[46. Permutations](https://leetcode.com/problems/permutations/)
 
 #Data Structures I
 
@@ -42,21 +34,3 @@
 [30_ Validate Binary Search Tree](https://leetcode.com/problems/validate-binary-search-tree/)
 [31_Two Sum IV - Input is a BST](https://leetcode.com/problems/two-sum-iv-input-is-a-bst/)
 [32_ Lowest Common Ancestor of a Binary Search Tree](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/)
-
-#String
-
-[1_Maximum Number of Words Found in Sentences](https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/)
-
-
-#Graph
-
-[997_Find the Town Judge](https://leetcode.com/problems/find-the-town-judge/)
-
-
-#Striver Series
-
-[73. Set Matrix Zeroes](https://leetcode.com/problems/set-matrix-zeroes/)
-[118. Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
-[31. Next Permutation](https://leetcode.com/problems/next-permutation/)
-[53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
-[121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)

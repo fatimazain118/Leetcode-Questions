@@ -1,0 +1,93 @@
+class MinStack {
+public:
+    stack<pair<int,int>> s;
+    
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        int _min;
+        if(s.empty()){
+            _min = x;
+        }
+        else{
+            _min = min(s.top().second, x);
+        }
+        s.push({x,_min});
+    }
+    
+    void pop() {
+        s.pop();
+    }
+    
+    int top() {
+        return s.top().first;
+    }
+    
+    int getMin() {
+        return s.top().second;
+    }
+};
+
+Time Complexity: O(1)
+
+Space Complexity: O(2N)   storing pair in stack
+_________________________________________________________________________________________________
+//O(N)
+
+class MinStack {
+public:
+    
+    stack<long long >st;
+    long long mini;
+    MinStack() {
+        mini=1e10;  
+    }
+    
+    void push( int val) {
+        
+        if(st.empty())
+        {
+            mini=val;
+            st.push(val);
+        }
+        else
+        {
+            if(val<mini)
+            {
+                st.push(2*1ll*val-mini);
+                mini=val;
+            }
+            else
+            {
+                st.push(val);
+            }
+        }
+    }
+    
+    void pop() {
+        
+        long long i=st.top();
+        st.pop();
+        if(i<mini)
+        {
+            mini=2*mini-i;
+        }
+    }
+    
+    int top() {
+        
+        long long i=st.top();
+        
+        if(i<mini)
+        {
+            return mini;
+        }
+        return i;
+    }
+    
+    int getMin() {
+        return mini;
+    }
+};

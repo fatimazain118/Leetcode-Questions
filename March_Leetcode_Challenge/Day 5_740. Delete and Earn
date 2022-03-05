@@ -1,0 +1,49 @@
+class Solution {
+public: 
+int deleteAndEarn(vector<int>& nums) {
+        int n = 10001;
+        vector<int> sum(n, 0);
+        vector<int> dp(n, 0);
+
+        // preparation of total sum array by each number
+        for(auto it: nums){
+            sum[it] += it;
+        }
+
+        dp[0] = 0;
+        dp[1] = sum[1];
+        
+        // similar to house robber problem
+        for(int i=2;i<n;i++){
+            // cannot select any element next to it
+            dp[i] = max(dp[i-2] + sum[i], dp[i-1]);
+        }
+        
+        return dp[n-1];
+    }
+};
+
+// class Solution {
+// public:
+//     int deleteAndEarn(vector<int>& nums) {
+ 
+//         int sums[10005];
+//         memset(sums,0,sizeof(sums));
+//         for(int i=0;i<nums.size();++i)
+//         {
+//             sums[nums[i]]+=nums[i];
+//         }
+ 
+//         int dp[10005];
+//         dp[1]=sums[1];
+//         dp[2]=max(sums[1],sums[2]);
+ 
+//         for(int i=3;i<10005;++i)
+//         {
+//             dp[i]=max(sums[i]+dp[i-2],dp[i-1]);
+//         }
+ 
+//         return max(dp[10004],dp[10003]);
+ 
+//     }
+// };

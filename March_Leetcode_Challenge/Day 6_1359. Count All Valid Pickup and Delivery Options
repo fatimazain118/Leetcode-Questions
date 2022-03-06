@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int countOrders(int n) {
+        vector<long long> dp(n+1,0);
+        dp[0] = 1;
+        int mod = pow(10,9) + 7;
+        
+        for(long long i=1; i<=n; i++){
+            dp[i] = i*dp[i-1]*(2*i-1);    //to place next element
+            dp[i] = dp[i]%mod;            //just to return ans as asked
+        }
+        return dp[n];
+    }
+};
+
+//for next ith element(dp[i-1]) we have 2n-1 ways to keep it
+//2n because for n we have two choices/slots pick or delivery

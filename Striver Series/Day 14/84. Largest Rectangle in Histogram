@@ -1,0 +1,67 @@
+class Solution {
+public:
+    int largestRectangleArea(vector<int>& heights) {
+        int maxArea = 0;
+        int n = heights.size();
+        
+        for(int i=0; i<n; i++){
+            int minHeight = INT_MAX;
+            for(int j=i; j<n; j++){
+                minHeight = min(minHeight, heights[j]);
+                maxArea = max(maxArea, minHeight*(j-i+1));         //for area = height*width
+            }
+        }
+        return maxArea;
+    }
+};
+
+Time Complexity: O(N*N ) gives TLE error
+
+Space Complexity: O(1)
+__________________________________________________________________________
+Solution 2: Optimised Approach 
+
+class Solution {
+  public:
+    int largestRectangleArea(vector < int > & heights) {
+      int n = heights.size();
+      stack < int > st;
+      int leftsmall[n], rightsmall[n];
+      for (int i = 0; i < n; i++) {
+        while (!st.empty() && heights[st.top()] >= heights[i]) {
+          st.pop();
+        }
+        if (st.empty())
+          leftsmall[i] = 0;
+        else
+          leftsmall[i] = st.top() + 1;
+        st.push(i);
+      }
+      // clear the stack to be re-used
+      while (!st.empty())
+        st.pop();
+
+      for (int i = n - 1; i >= 0; i--) {
+        while (!st.empty() && heights[st.top()] >= heights[i])
+          st.pop();
+
+        if (st.empty())
+          rightsmall[i] = n - 1;
+        else
+          rightsmall[i] = st.top() - 1;
+
+        st.push(i);
+      }
+      int maxA = 0;
+      for (int i = 0; i < n; i++) {
+        maxA = max(maxA, heights[i] * (rightsmall[i] - leftsmall[i] + 1));
+      }
+      return maxA;
+    }
+};
+
+Time Complexity: O( N )
+
+Space Complexity: O(3N) where 3 is for the stack, left small array and a right small array
+____________________________________________________________________________________________________________
+

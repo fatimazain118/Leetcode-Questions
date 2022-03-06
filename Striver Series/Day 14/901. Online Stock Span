@@ -1,0 +1,29 @@
+class StockSpanner {
+public:
+    stack<pair<int,int>> s;
+    StockSpanner() {
+    }
+    
+    int next(int price) {
+        int count = 1;
+        
+        if(s.empty()){
+            s.push({price,1});
+            return 1;
+        }
+        
+       else{
+        while(!s.empty() && s.top().first <= price){
+            count +=s.top().second;
+            s.pop();
+        }
+        
+        s.push({price, count});
+        return count;
+       }    
+    }
+};
+
+//T.C - O(N) in one pass
+//S.C - O(N) stack is used
+//Similar to previous smaller elements

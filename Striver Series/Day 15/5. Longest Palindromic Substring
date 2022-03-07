@@ -1,0 +1,59 @@
+Brute Force:- Make all substring O(N^2) from this check for max length substring which is palindrome in O(N) time  TOTAL gives O(N^3) time
+____________________________________________________________________________________________
+Can also be done by DP but gives same T.C
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if(s.length() <= 1) return s;
+        int max_len = 1;
+        int n = s.length();
+        int start = 0, end = 0;
+        
+        // odd length
+        for(int i=0; i<n-1; i++){
+            int l=i, r=i;
+            
+            while(l>=0 && r<n){
+                if(s[l] == s[r]){
+                    l--;
+                    r++;
+                }
+                else{
+                    break;
+                }
+                int len = r-l-1;
+                if(len >= max_len){   //this will give length of palindrome
+                    max_len = len;
+                    start = l+1;      //In start taking the prev value as it comes out of while loop by l-- or r++
+                    end = end-1;
+                }
+            }
+        }
+        
+        //even length
+            for(int i=0; i<n-1; i++){
+            int l=i, r=i+1;
+            
+            while(l>=0 && r<n){
+                if(s[l] == s[r]){
+                    l--;
+                    r++;
+                }
+                else{
+                    break;
+                }
+                int len = r-l-1;
+                if(len >= max_len){
+                    max_len = len;
+                    start = l+1;
+                    end = end-1;
+                }
+            }
+        }
+        return s.substr(start, max_len);         //In substr in c++ we pass starting, and then length of substring
+    }
+};
+
+//O(N^2) - T.C
+//O(1)

@@ -1,0 +1,61 @@
+1. Iterative :
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> inorder;
+        stack<TreeNode*> stk;
+        
+  while(true)
+     {
+            if(root != NULL)
+     {
+          stk.push(root);    //pushing the element into the stack till we dont go to leftmost node
+          root = root->left;
+        }
+            else
+            {
+                if(stk.empty() == true) break;
+                root = stk.top(); 
+                stk.pop();
+                inorder.push_back(root->val);
+                root = root->right;
+           }
+        }
+        return inorder;
+    }
+};
+
+T.C - Time Complexity: O(N).
+
+Reason: We are traversing N nodes and every node is visited exactly once.
+
+Space Complexity: O(N)
+
+Reason: In the worst case (a tree with just left children), the space complexity will be O(N).
+______________________________________________________________________________________________________
+2. Recursive Solution
+
+class Solution {
+public:
+     vector<int> inorder;
+    vector<int> inorderTraversal(TreeNode* root) {
+        TreeNode* curr = root;
+        
+        if(curr == NULL)  return inorder;
+        
+        inorderTraversal(curr->left);
+        inorder.push_back(curr->val);
+        inorderTraversal(curr->right);
+        
+        return inorder;
+   }
+};
+
+Time Complexity: O(N).
+
+Reason: We are traversing N nodes and every node is visited exactly once.
+
+Space Complexity: O(N)
+
+Reason: Space is needed for the recursion stack. In the worst case (skewed tree), space complexity can be O(N).

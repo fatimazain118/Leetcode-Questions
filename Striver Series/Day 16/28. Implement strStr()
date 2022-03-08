@@ -1,0 +1,16 @@
+//The function returns the index of the first occurrence of sub-string, if the sub-string is not found it returns string::npos
+
+
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle == "")  return 0;
+        
+        int found = haystack.find(needle);       //from stl find function this gives first occurrence of string which we have to find
+        if(found != string::npos)  return found;  
+        return  -1;
+    }
+};
+
+//O(N*M)   T.C
+//O(1) S.C

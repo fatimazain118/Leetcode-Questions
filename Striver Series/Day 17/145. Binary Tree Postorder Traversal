@@ -1,0 +1,68 @@
+// Iterative Using two stacks
+
+class Solution {
+public:
+    
+    vector<int> postorderTraversal(TreeNode* root)
+    {
+        vector<int> postorder;
+        if(root == NULL)  return postorder;
+        stack<TreeNode*> s1,s2;
+        
+        s1.push(root);
+        while(!s1.empty()){
+            root = s1.top();
+            s1.pop();
+            s2.push(root);
+            if(root->left != NULL){
+                s1.push(root->left);
+            }
+            if(root->right != NULL){
+                s1.push(root->right);
+            }
+        }
+        while(!s2.empty()){
+            postorder.push_back(s2.top()->val);
+            s2.pop();
+        }
+        return postorder;
+    }
+};
+
+Time Complexity: O(N).
+
+Reason: We are traversing N nodes and every node is visited exactly once.
+
+Space Complexity: O(N+N)
+______________________________________________________________________________________________
+// Recursive
+
+class Solution {
+public:
+    
+    void postorderTraversal(TreeNode* root, vector<int> &postorder)
+    {
+        if(root != NULL)
+        {
+            postorderTraversal(root->left, postorder);
+             postorderTraversal(root->right, postorder);
+             postorder.push_back(root->val);
+        }
+    }
+    
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int> postorder;
+        postorderTraversal(root, postorder);
+        return postorder;
+    }
+};
+
+Time Complexity: O(N).
+
+Reason: We are traversing N nodes and every node is visited exactly once.
+
+Space Complexity: O(N)
+
+Reason: Space is needed for the recursion stack. In the worst case (skewed tree), space complexity can be O(N).
+
+

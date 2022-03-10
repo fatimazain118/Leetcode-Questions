@@ -1,0 +1,24 @@
+ void Left(Node *root, vector <int> &v, int level)
+{
+    if(root!=NULL)
+    {   
+        if(v.size()==level)
+        {
+        v.push_back(root->data);
+        }
+        Left(root->left, v, level+1);         //for right view just exchange these two line
+        Left(root->right, v, level+1);
+    }
+}
+vector<int> leftView(Node *root)
+{
+   vector <int> v;
+   Left(root, v, 0);
+   return v;
+}
+
+
+
+Time Complexity: O(N)
+
+Space Complexity: O(H)       (H -> Height of the Tree) //we generally don't take size of stack(in recursion) coz we return call

@@ -1,0 +1,63 @@
+//Iterative way
+
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int> preorder;
+        if(root == NULL) return preorder;
+        
+        stack<TreeNode*> stk;
+        stk.push(root);
+        
+        while(!stk.empty())        //checking stack is empty or not
+        {
+          preorder.push_back(root->val);  //push root  
+            if(root->right != NULL)
+            {
+                stk.push(root->right);  //push root->right's value first
+            }
+             if(root->left != NULL)
+             {
+                 stk.push(root->left);    //then left's value
+            }
+            
+            root = stk.top();     //whatever is the top of the stack pop it and print it
+            stk.pop();
+        }
+        return preorder;
+    }
+};
+
+Time Complexity: O(N).
+
+Reason: We are traversing N nodes and every node is visited exactly once.
+
+Space Complexity: O(N)
+
+Reason: In the worst case, (a tree with every node having a single right child and left-subtree, follow the video attached below to see the illustration), the space complexity can be considered as O(N).
+_____________________________________________________________________________________________________________________________________________________________________________________________________________________
+
+//Iterative way
+
+class Solution {
+public:
+    vector<int> ans;
+    vector<int> preorderTraversal(TreeNode* root) {
+        TreeNode* curr = root;
+        
+        if(curr == NULL)  return ans;;
+        
+            ans.push_back(curr->val);
+            preorderTraversal(curr->left);
+            preorderTraversal(curr->right);
+        return ans;
+    }
+};
+
+Time Complexity: O(N).
+
+Reason: We are traversing N nodes and every node is visited exactly once.
+
+Space Complexity: O(N)
+
+Reason: Space is needed for the recursion stack. In the worst case (skewed tree), space complexity can be O(N).

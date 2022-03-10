@@ -59,3 +59,39 @@ Reason: We are traversing N nodes and every node is visited exactly once.
 Space Complexity: O(N)
 
 Reason: Space is needed for the recursion stack. In the worst case (skewed tree), space complexity can be O(N).
+________________________________________________________________________________________________________________________
+Morris Inorder Traversal of a Binary tree (threaded Binary Tree)
+
+class Solution {
+public:
+     vector<int> inorder;
+    vector<int> inorderTraversal(TreeNode* root) {
+      TreeNode* curr = root;
+        while(curr != NULL){
+            if(curr->left == NULL){
+                inorder.push_back(curr->val);
+                curr = curr->right;
+            }
+            else{
+                TreeNode* prev = curr->left;
+                while(prev->right && prev->right != curr){       //checking again right is not pointing to curr(root)
+                    prev = prev->right;
+                }
+                if(prev->right == NULL){
+                    prev->right = curr;
+                    curr = curr->left;
+                }
+                else{
+                   prev->right = NULL;          //cutting the thread
+                    inorder.push_back(curr->val);
+                    curr = curr->right;
+                }
+            }
+        }
+      return inorder;
+   }
+};
+
+Time Complexity: O(N).
+
+Space Complexity: O(1)      //Space Complexity is reduced 

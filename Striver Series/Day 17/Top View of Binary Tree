@@ -1,0 +1,36 @@
+// Same as Bottom view with one if condition change i.e check in map is node already present or not
+
+vector<int> topView(Node *root)
+    {
+        vector<int> ans;
+        if(root == NULL) return ans;
+        map<int,int> mpp;
+        queue<pair<Node*, int>> q;   //inserting pair of node, line(vertical)
+        
+        q.push({root,0});
+        while(!q.empty()){
+            auto it = q.front();
+            q.pop();
+            Node* node = it.first;
+            int line = it.second;
+            
+            if(mpp.find(line) == mpp.end()){
+            mpp[line] = node->data;         //pushing into the map if not already present
+            }
+            
+            if(node->left != NULL){
+                q.push({node->left, line-1});
+            }
+            if(node->right != NULL){
+                q.push({node->right, line+1});
+            }
+        }
+        for(auto it : mpp){
+            ans.push_back(it.second);
+        }
+        return ans;
+  }
+  
+Time Complexity: O(N)
+
+Space Complexity: O(N)

@@ -11,12 +11,12 @@ Code :
 class Solution {
 public:
     ListNode* rotateRight(ListNode* head, int k) {
-        if(head==NULL || head->next==NULL)  return head;
+        if(head==NULL || head->next==NULL)  return head;        //checking for starting two nodes
         
-        for(int i=0; i<k; i++){
+        for(int i=0; i<k; i++){                           //iterating k times
             ListNode* temp = head;
-            while(temp->next->next != NULL)   temp = temp->next;
-            ListNode* end = temp->next;
+            while(temp->next->next != NULL)   temp = temp->next;           //temp will be pointing to second last node
+            ListNode* end = temp->next;                                    //end will be pointing to last node
             temp->next = NULL;
             end->next = head;
             head = end;
@@ -44,13 +44,13 @@ public:
         
         ListNode* curr = head;
         int len = 1;
-        while(curr->next  && len++)  curr = curr->next;
+        while(curr->next  && len++)  curr = curr->next;         //find the length of LL
         
-        curr->next = head;
-        k = k%len; 
-        k = len - k;
+        curr->next = head;          //this will make circular LL
+        k = k%len;                 //coz any multiple of length will give you the same LL
+        k = len - k;           //To remove the last k nodes from end of LL i.e break the link from len-k
         
-        while(k--) curr = curr->next;
+        while(k--) curr = curr->next;       //again iterate to reach new last node
         
         head = curr->next;
         curr->next = NULL;

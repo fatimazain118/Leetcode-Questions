@@ -1,0 +1,41 @@
+Solution 1: Naive approach
+
+Approach : 
+
+Traverse the tree recursively.
+At every node, calculate height of left and right subtrees.
+Calculate the diameter for every node using the above formula.
+Calculate the maximum of all diameters. This can be done simply using a variable passed by reference in the recursive calls or a global static variable.
+
+Time Complexity: O(N*N) ( For every node, Height Function is called which takes O(N) time hence for every node it becomes N*N ) 
+
+Space Complexity: O(1) ( Extra Space ) + O(H) ( Recursive Stack Space where “H” is the height of tree )
+
+______________________________________________________________________________________________________________________________________________
+
+
+class Solution {
+public:
+int d=0;
+int diameter(TreeNode* root) {
+    
+if(root==NULL)
+return 0;
+    
+int lh= diameter(root->left);
+int rh= diameter(root->right);
+d=max(d,lh+rh);
+return 1+max(lh,rh);
+}
+
+int diameterOfBinaryTree(TreeNode* root) {
+diameter(root);
+return d;
+}
+};
+
+Time Complexity: O(N) 
+
+Space Complexity: O(1) Extra Space + O(H) Recursion Stack space (Where “H”  is the height of binary tree )  
+
+

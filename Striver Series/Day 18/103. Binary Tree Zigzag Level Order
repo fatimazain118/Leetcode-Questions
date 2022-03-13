@@ -1,0 +1,42 @@
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> ans;
+        if(root == NULL)  return ans;
+        
+        queue<TreeNode*> Queue;
+        Queue.push(root);
+        bool flag = true;    //flag true means traversal is left to right
+        
+        while(!Queue.empty()){
+            int size = Queue.size();   //for all the node in particular level
+            vector<int> row(size);
+            
+            for(int i=0; i<size; i++){          //for iterating on all nodes in a particular level
+                TreeNode* node = Queue.front();
+                Queue.pop();
+                
+                int index = (flag) ? i : (size-1-i);          //if true then idexing will be same else reverse
+                
+                row[index] = node->val;
+                
+                if(node->left){
+                    Queue.push(node->left);
+                }
+                
+                if(node->right){
+                    Queue.push(node->right);
+                }
+            }     
+                //after this level
+                flag = !flag;
+                ans.push_back(row);
+            }
+            return ans;
+        }
+};
+
+
+Time Complexity: O(N)   
+
+Space Complexity: O(N)

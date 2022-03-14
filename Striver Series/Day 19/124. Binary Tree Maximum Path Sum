@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int maxPathSum(TreeNode* root) {
+        int maxi = INT_MIN;
+        maxPathDown(root, maxi);
+        return maxi;
+    }
+    
+    int maxPathDown(TreeNode* node, int &maxi){
+        if(node == NULL)  return 0;
+        
+        int left = max(0, maxPathDown(node->left, maxi));       //just because if we get -ve value from left or right we'll not take it instead take 0
+        int right = max(0, maxPathDown(node->right, maxi));
+        
+        maxi = max(maxi, left+right+node->val);
+        
+        return max(left, right) + node->val;
+    }
+};
+
+Time Complexity: O(N).
+
+Reason: We are doing a tree traversal.
+
+Space Complexity: O(N)
+
+Reason: Space is needed for the recursion stack. In the worst case (skewed tree), space complexity can be O(N).

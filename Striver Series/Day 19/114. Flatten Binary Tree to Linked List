@@ -1,0 +1,27 @@
+1. Using Recursion
+
+class Solution {
+       TreeNode* prev = NULL;
+public:
+    void flatten(TreeNode* root) {
+        if(root == NULL) return;
+        
+        flatten(root->right);
+        flatten(root->left);
+        
+        root->right = prev;
+        root->left = NULL;
+        prev = root;              //update that node in prev
+    }
+};
+
+Time Complexity: O(N)
+
+Reason: We are doing a simple preorder traversal.
+
+Space Complexity: O(N)
+
+Reason: Worst case time complexity will be O(N) (in case of skewed tree).
+_______________________________________________________________________________
+Iterative approach is using stack but it give same time/space complexities
+

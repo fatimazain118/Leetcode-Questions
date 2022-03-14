@@ -1,0 +1,29 @@
+class Solution {
+public:
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        unordered_map<int, int> M;
+        for (int i = 0; i < inorder.size(); i++)
+            M[inorder[i]] = i;              //storing inorder in map
+        return splitTree(preorder, 0, preorder.size()-1, inorder, 0, inorder.size()-1, M);  
+    }
+    
+    TreeNode* splitTree(vector<int>& preorder, int ps, int pe, vector<int> &inorder, int is, int ie, unordered_map<int, int> &m){
+        if(ps > pe || is > ie)  return NULL;
+        
+        TreeNode* root = new TreeNode(preorder[ps]);       //starting of preorder is root
+        int inRoot = m[root->val];        //find the position of root in inorder though map
+        int numsLeft = inRoot - is;
+        
+        root->left = splitTree(preorder, ps+1, ps+numsLeft, inorder, is, inRoot-1, m);
+        root->right = splitTree(preorder, ps+numsLeft+1, pe, inorder,inRoot+1, ie, m);
+        return root;
+    }
+};
+
+.Time Complexity: O(N)
+
+Assumption: Hashmap returns the answer in constant time.
+
+Space Complexity: O(N)
+
+Reason: We are using an external hashmap of size ‘N’.

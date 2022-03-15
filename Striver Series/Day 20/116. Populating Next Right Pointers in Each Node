@@ -1,0 +1,21 @@
+class Solution {
+public:
+    Node* connect(Node* root) {
+        if(root == NULL){
+            return NULL;
+        }
+        
+        Node* curr = root;
+        while(curr->left != NULL){
+            Node* temp = curr;          //for traversing the level
+            
+            while(curr != NULL){        //means we have travel the entire level
+               curr->left->next = curr->right;
+               curr->right->next = curr->next == NULL ? NULL : curr->next->left; 
+               curr = curr->next; 
+            }
+            curr = temp->left;
+        }
+        return root;
+    }
+};

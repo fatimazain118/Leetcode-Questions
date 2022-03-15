@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string minRemoveToMakeValid(string s) {
+        stack<int> stk;         //storing the index of bracket
+        
+        for(int i=0;i<s.size(); i++){
+            if(s[i] == '(')  stk.push(i);
+            else if(s[i] == ')'){
+                if(!stk.empty() && s[stk.top()] == '(')  stk.pop();    //for every matching pop it
+                else stk.push(i);
+            }
+        }
+        while(!stk.empty()){
+            s.erase(stk.top(),1);      //size of len to be deleted i.e 1
+            stk.pop();
+        }
+        return s;
+    }
+};

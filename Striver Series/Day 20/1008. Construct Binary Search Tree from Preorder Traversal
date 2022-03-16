@@ -1,0 +1,22 @@
+//As preorder is given we can sort this to find inorder(as in BST inorder is always sorted) as using pre and inorder we can create unique BST
+
+class Solution {
+public:
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        int i=0;                               //global pointer to traverse preorder
+        return build(preorder, i, INT_MAX);
+    }
+    
+    TreeNode* build(vector<int> &preorder, int &i, int bound){
+        if(i==preorder.size() || preorder[i] > bound) return NULL;      //if preorder value is greater than root value insert NULL
+        
+            TreeNode* root = new TreeNode(preorder[i++]);        //otherwise insert it
+            root->left = build(preorder, i, root->val);           
+            root->right = build(preorder, i, bound);
+        return root;
+    }
+};
+
+
+//T.C - O(N)
+//S.C - O(N)

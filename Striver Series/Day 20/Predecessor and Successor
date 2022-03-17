@@ -1,0 +1,30 @@
+void findPre(Node* root, Node* &pre, int key){
+    if(root==NULL) return;
+    
+    if(root->key < key){
+        pre = root;
+        findPre(root->right,pre,key);
+    }
+    else if(root->key >= key){        //to get immediate predecessor
+        findPre(root->left, pre, key);
+    }
+}
+
+void findSuc(Node* root, Node* &suc, int key){
+    if(root==NULL)  return;
+    
+    if(root->key > key){
+        suc = root;             //node greater than key can be a suc
+        findSuc(root->left, suc, key);
+    }
+    else if(root->key <= key){
+        findSuc(root->right, suc, key);
+    }
+}
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key)
+{
+
+   findPre(root,pre,key);
+   findSuc(root,suc,key);
+
+}

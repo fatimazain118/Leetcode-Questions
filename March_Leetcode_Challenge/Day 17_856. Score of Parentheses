@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int scoreOfParentheses(string s) {
+        stack<int> stk;
+        int sum=0;
+        
+        for(char ch:s){
+            if(ch=='('){
+                stk.push(-1);    //pushing -1 when it's opening bracket
+            }
+            else{
+                if(stk.top() == -1){
+                    stk.pop();
+                    stk.push(1);      //pushing 1 coz matching is found 
+                }
+                else{                //else part when stack have top as 1
+                    //int sum=0;
+                    while(stk.top()!=-1){
+                        sum+=stk.top();            //add that 1 to sum
+                        stk.pop();                 //and then pop it
+                    }
+                    stk.pop();
+                    stk.push(2*sum);
+                }
+            }
+        }
+        
+        int ans=0;
+        while(!stk.empty()){     //whatever is in stack add it to ans
+            ans+=stk.top();
+            stk.pop();
+        }
+        return ans;
+    }
+};

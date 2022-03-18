@@ -1,0 +1,38 @@
+class Solution {
+public:
+    string removeDuplicateLetters(string s) {
+        vector<int> lastIndex(26,0);
+        for(int i=0; i<s.length(); i++){
+            lastIndex[s[i]-'a'] = i;
+        }
+        
+        vector<bool> seen(26, false);
+        stack<char> stk;
+        
+        for(int i=0; i<s.size(); i++){
+            int curr = s[i] - 'a';
+            
+            if(seen[curr]){       //in seen vector it's already true
+                continue;
+            }
+            
+            while(stk.size() > 0 && stk.top() > s[i] && i<lastIndex[stk.top() - 'a']){
+                seen[stk.top() - 'a'] = false;
+                stk.pop();
+            }
+            stk.push(s[i]);
+            seen[curr] = true;
+        }
+        
+        string res = "";
+        while(stk.size() > 0){
+            res += stk.top();
+            stk.pop();
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+};
+
+//T.C - O(N)
+//S.C - O(N)

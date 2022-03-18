@@ -1,0 +1,25 @@
+class BSTIterator {
+private:  stack<TreeNode*> s;
+public:
+    BSTIterator(TreeNode* root) {
+        pushAll(root);
+    }
+    
+    int next() {
+        TreeNode* temp = s.top();
+        s.pop();
+        pushAll(temp->right);
+        return temp->val;
+    }
+    
+    bool hasNext() {
+        return !s.empty();
+    }
+    
+  private : void pushAll(TreeNode* node){
+      for(;node!=NULL; s.push(node), node = node->left);
+  }  
+};
+
+//T.C- O(N)
+//S.C- O(H)

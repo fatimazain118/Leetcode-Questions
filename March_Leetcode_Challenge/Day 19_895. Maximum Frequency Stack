@@ -1,0 +1,22 @@
+class FreqStack {
+     //can be done using max heap
+        priority_queue<pair<int, pair<int, int>>> pq;    // (count/freq, (pos, element))
+        unordered_map<int, int> freq;     //to find the freq of each element
+        int pos = 0;                       // and it's position
+public:
+    FreqStack() {
+    
+    }
+    
+    void push(int val) {
+        pq.push(make_pair(++freq[val], make_pair(++pos, val)));         //log(N)
+    }
+    
+    int pop() {                                         //log(N)
+        auto val = pq.top();
+        pq.pop();                   //max heap will the element having the max count
+        int x = val.second.second;
+        freq[x]--;
+        return x;
+    }
+};

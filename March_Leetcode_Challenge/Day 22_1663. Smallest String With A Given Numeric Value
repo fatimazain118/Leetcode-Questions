@@ -1,0 +1,26 @@
+class Solution {
+public:
+    string getSmallestString(int n, int k) {
+        vector<int> ans(n,1);    //assign 1 to all
+        k = k-n;    //reducing the sum
+        int i=n-1;   //checking from last
+        
+        while(k){
+            if(k>25){
+                ans[i]=26;
+                i--;
+                k = k-25;
+            }
+            else{
+                ans[i]=k+1;      //add directly k to 1(as 1 was already there)
+                k-=k;
+            }
+        }
+        //ascii value of a is 97 and b is 98 so to convert it to string add 96 as 1
+        string output;
+        for(int i=0; i<ans.size(); i++){
+            output +=char(ans[i]+96);
+        }
+        return output;
+    }
+};

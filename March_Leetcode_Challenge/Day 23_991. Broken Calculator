@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int brokenCalc(int startValue, int target) {
+       if(startValue >= target)  return startValue - target;
+        
+        if(target%2 == 0){              //when target in even
+            return 1+brokenCalc(startValue, target/2);   //1 is added as one operation has been performed
+        }
+        return 1 + brokenCalc(startValue, target + 1);    // startValue - 1 = target
+    }
+};
+
+
+//T.C - O(logn)
+//S.C - O(1)

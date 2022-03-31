@@ -1,0 +1,19 @@
+vector <int> countDistinct (int A[], int n, int k)
+    {
+        vector<int> v;
+        map<int,int> mp;
+        
+        for(int i=0; i<k; i++){
+            mp[A[i]]++;
+        }
+        v.push_back(mp.size());
+        
+        for(int i=k; i<n; i++){
+            if(mp[A[i-k]]==1)  mp.erase(A[i-k]);  //if already present in map erase it
+            else  mp[A[i-k]]--;           //if not 1 decrement it's count
+            mp[A[i]]++;                   //increase the count of last elemnt of window
+            
+            v.push_back(mp.size());
+        }
+        return v;
+    }

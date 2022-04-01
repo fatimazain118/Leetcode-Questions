@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        //Using Min heap
+        
+        priority_queue<int, vector<int>, greater<int>> minHeap; 
+        
+        for(int num : nums){
+            minHeap.push(num);
+            
+            if(minHeap.size()>k)  minHeap.pop();
+        }
+        return minHeap.top();
+    }
+};
+
+
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        //Using Max heap
+        
+        priority_queue<int> maxHeap;   //default in C++
+        for(auto &i : nums){
+            maxHeap.push(i);     //this automatically heapify
+        }
+        
+        for(int i=1; i<k; i++){         //poping out k-1 element from heap
+            maxHeap.pop();
+        }
+        return maxHeap.top();
+    }
+};

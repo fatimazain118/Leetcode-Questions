@@ -1,0 +1,21 @@
+class Solution {
+public:
+    void fill(vector<vector<int>> &image, int sr, int sc, int newColor, int prev) {
+        if (sr < 0 || sc < 0 || sr >= image.size() || sc >= image[0].size()) return;
+        
+        if (image[sr][sc] == prev) {
+            if (prev == newColor) return;            //if already it's having color
+            image[sr][sc] = newColor;                //else color it
+            fill(image, sr + 1, sc, newColor, prev);
+            fill(image, sr, sc + 1, newColor, prev);
+            fill(image, sr - 1, sc, newColor, prev);
+            fill(image, sr, sc - 1, newColor, prev);
+        }
+    }
+
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
+        int prev = image[sr][sc];                           //oldColor
+        fill(image, sr, sc, newColor, prev);
+        return image;
+    }
+};

@@ -1,0 +1,31 @@
+   vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+        
+        vector<int> ans;
+        vector<int> vis(V,0);
+        queue<int> q;
+        
+        q.push(0);            //push starting node 
+        vis[0]=1;             //mark it has visited
+        
+        while(!q.empty()){     //iterate till queue is not empty
+            int x=q.front();
+            ans.push_back(x);
+            q.pop();
+            for(auto i:adj[x]){           //explore it's neighbours
+                if(!vis[i]){
+                    vis[i]=1;
+                    q.push(i);
+                }
+            }
+        }
+        return ans;
+    }
+    
+    
+Time Complexity : O(N+E)
+
+N = Nodes , E = travelling through adjacent nodes
+
+Space Complexity : O(N+E) + O(N) + O(N) 
+
+Space for adjacency list, visited array, queue data structure

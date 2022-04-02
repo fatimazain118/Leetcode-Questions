@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool validPalindrome(string s) {
+        int left = 0, right = s.size()-1;
+        int count1 = 0, count2 = 0;
+        
+        while(left<right){
+            if(s[left] == s[right]){
+                left++;
+                right--;
+            }
+            else{
+                left++;         //deleting from front
+                count1++;
+            }
+        }
+        
+        left = 0; right = s.size()-1;     //reinitiallise again for second loop
+         while(left<right){
+            if(s[left] == s[right]){
+                left++;
+                right--;
+            }
+            else{
+                right--;      //this time deleting from end
+                count2++;
+            }
+         }
+        
+        if(count1 == 1 || count2 == 1)    return true;
+        if(count1 == 0 || count2 == 0) return true;
+
+        return false;
+    }
+};

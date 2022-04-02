@@ -1,0 +1,30 @@
+Depth First Traversal is a traversal technique/algorithm, used to traverse through all the nodes in the given graph.
+
+It starts traversal through any one of its neighbour nodes and explores the farthest possible node in each path/branch and then starts Back-tracking.
+
+Code :
+
+class Solution {
+    void dfs(int node, vector<int> &vis, vector<int> adj[], vector<int> &storeDfs) {
+        storeDfs.push_back(node); 
+        vis[node] = 1; 
+        for(auto it : adj[node]) {          //explore every adjacency node
+            if(!vis[it]) {
+                dfs(it, vis, adj, storeDfs); 
+            }
+        }
+    }
+public:
+	vector<int>dfsOfGraph(int V, vector<int> adj[]){
+	    vector<int> storeDfs; 
+	    vector<int> vis(V+1, 0); 
+      for(int i = 1;i<=V;i++) {                         //for different components
+        if(!vis[i]) dfs(i, vis, adj, storeDfs);         //if not visited call again
+      }
+	    return storeDfs; 
+	}
+};
+
+Time complexity: O(N+E), Where N is the time taken for visiting N nodes and E is for travelling through adjacent nodes.
+
+Space Complexity:O(N+E)+O(N)+O(N) , Space for adjacency list, Array,Auxiliary space.

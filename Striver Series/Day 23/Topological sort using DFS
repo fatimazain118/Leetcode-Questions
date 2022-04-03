@@ -1,0 +1,41 @@
+	void findTopoSort(int node, vector<int> &vis, stack<int> &s, vector<int> adj[]){
+	    vis[node] = 1;
+	    for(auto it : adj[node]){
+	        if(!vis[it]){
+	            findTopoSort(it, vis, s, adj);
+	        }
+	    }
+	    s.push(node);        //after exploring all neighbours of node push it into the stcak
+	}
+	
+	//Function to return list containing vertices in Topological order. 
+	vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    stack<int> stk;
+	    vector<int> vis(V,0);        //0 means not visited
+	    
+	    for(int i=0; i<V; i++){
+	        if(vis[i] == 0){
+	            findTopoSort(i, vis, stk, adj);
+	        }
+	    }
+	    vector<int> topo;
+	    while(!stk.empty()){
+	        topo.push_back(stk.top());
+	        stk.pop();
+	    }
+	    return topo;
+   }   
+   
+   
+Time Complexity: O(N+E) 
+
+N = Number of node , E = Number of Edges
+
+Space Complexity: O(N) + O(N)
+
+Visited Array and Stack data structure. Both will be using O(N).
+
+Auxiliary Space Complexity:  O(N)
+
+Recursion call of DFS

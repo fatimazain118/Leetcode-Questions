@@ -1,0 +1,49 @@
+// Similar to Detect cycle in directed graph using BFS
+
+class Solution {
+public:
+    bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        queue<int> q;
+        vector<int> indegree(numCourses, 0);
+        vector<int> graph[numCourses];
+      
+        
+        // create graph 
+        for(int i = 0; i < prerequisites.size(); i++){
+                graph[prerequisites[i][1]].push_back(prerequisites[i][0]);
+        }
+        
+        // store the indegree
+        for(int i = 0; i < numCourses; i++){
+            for(auto it : graph[i]){
+                indegree[it]++;
+            }
+        }
+        
+        //first push the vertex with 0 degree 
+        for(int i = 0; i < numCourses; i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+        
+        int count = 0;
+        
+        while(!q.empty()){
+            int current = q.front();
+            q.pop();
+            count++;
+            for(auto it : graph[current]){                  // decrease indegree by 1 
+                indegree[it]--;
+            
+              if(indegree[it] == 0){
+                q.push(it);
+               }
+           }
+        }
+      if(count == numCourses)  return true;
+        return false;
+        
+    }
+};
+

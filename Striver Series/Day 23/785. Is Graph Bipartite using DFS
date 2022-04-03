@@ -1,0 +1,33 @@
+class Solution {
+public:
+bool checkDFS(vector<vector<int>>& graph,int src,vector<int> &color){   
+    if(color[src] == -1){
+        color[src] = 1;
+    }
+    
+    for(auto it : graph[src]){
+        if(color[it] == -1){
+            color[it] = 1- color[src];
+            if(!checkDFS(graph, it, color))  return false;
+        }
+        else if(color[it] == color[src])  return false;
+    }
+    return true;
+  }
+    
+     bool isBipartite(vector<vector<int>>& graph) {
+         int V = graph.size();
+         vector<int> color(V, -1);
+         
+         for(int i=0; i<V; i++){
+             if(color[i] == -1){
+                 if(checkDFS(graph, i, color) == false)  return false;
+             }
+         }
+         return true;
+     }
+};
+
+Time Complexity: O(V + E), since in its whole, it is a DFS implementation, V – vertices; E – edges;
+
+Space Complexity: O(V), because, apart from the graph, we maintain a color array.

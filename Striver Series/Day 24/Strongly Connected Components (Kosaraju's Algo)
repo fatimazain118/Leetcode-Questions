@@ -1,0 +1,55 @@
+Kosaraju’s Algorithm for Strongly Connected Components(SCC)
+
+void TopoDFS(int V, vector<int> adj[] , vector<bool> &visited , stack <int> &s , int u)
+	{
+	    visited[u] = true;
+	    for(auto v: adj[u])
+	    {
+	        if(!visited[v])
+	           TopoDFS(V,adj,visited,s,v); 
+	    }
+	    s.push(u);
+	}
+	
+    int kosaraju(int V, vector<int> adj[])
+    {
+        vector <bool> visited (V, false);
+        stack<int> s ;
+        for(int i=0; i<V ;i++)
+        {
+            if(!visited[i])
+            {
+                TopoDFS(V,adj,visited,s,i);
+            }
+                
+        }
+        
+        vector <int> revAdj [V] ;
+        for(int i=0;i<V;i++)
+        {
+            for(auto j : adj[i])
+            {
+                revAdj[j].push_back(i);
+                //cout<< j <<" " << i << endl;
+            }
+        }
+        
+        fill(visited.begin(),visited.end(),false);
+        stack<int> temp;
+        int count;
+        while(!s.empty())
+        {
+            int u = s.top();
+            s.pop();
+            if(!visited[u])
+            {
+                TopoDFS(V,revAdj,visited,temp,u);
+                count++;
+            }
+        }
+        return count;
+    }
+    
+Time Complexity: O(N+E), DFS+TopoSort
+
+Space Complexity: O(N+E), Transposing the graph

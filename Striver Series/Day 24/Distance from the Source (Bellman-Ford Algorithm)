@@ -1,0 +1,28 @@
+   //as dijkstra  doesn't work for negative edges
+    //For directed Graph -> Bellman doesn't work for negative cycle but it tell's there is negative cycle
+    //For Undirected Graph -> it convert UG to Directed graph and detect a cycle
+    
+vector <int> bellman_ford(int N, vector<vector<int>> adj, int source) {
+   vector<int> distance(N,100000000),empty;
+   distance[source]=0;
+   
+   for(int i=1;i<=N-1;i++)          //Do N-1 time relaxation
+        for(auto itr:adj)
+          if(distance[itr[0]]+itr[2]<distance[itr[1]])       //as adj has (u,v,wt) i.e (0,1,2)
+               distance[itr[1]]=distance[itr[0]]+itr[2];
+               
+   for(auto itr:adj){                      //if there will be negative cycle dist will reduce again so relax the edge one more time
+     if(distance[itr[0]]+itr[2]<distance[itr[1]]) {
+           return empty;
+     }
+   }
+       return distance;
+    }
+};
+
+
+Time Complexity: O(N*E). We check E edges N times       //O(N-1) *O(E), N-1 relaxation for E edges
+
+Space Complexity: O(N). Distance Array
+
+

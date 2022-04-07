@@ -1,0 +1,37 @@
+int spanningTree(int n, vector<vector<int>> adj[])
+    {
+       vector<int> key(n,INT_MAX); //to get min value
+       vector<bool> mst(n,false);  //to know it's a part of MST
+       vector<int> parent(n);   //to track it's parents
+       key[0]=0;
+       int ans=0;
+       parent[0] = -1;
+       
+       priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+       pq.push({0,0});
+       
+        for(int i=0;i<n;i++){          //iterating on 
+            int minVal=pq.top().second;
+            pq.pop();
+            mst[minVal]=true;         //then mark it as true means part of MST 
+            
+               if(key[i]<minVal and mst[i]==false){   //it's not the part of MST and has min val
+                    minVal=key[i];
+                    minValNode=i;
+                }  for(int i=0;i<n;i++)
+           
+                
+          
+           ans+=minVal;
+           
+            for(auto itr:adj[minValNode]){      //iterating on it's adjacent edges
+                    int u=itr[0];
+                    int w=itr[1];             //weight
+                    if(w<key[u] and mst[u]==false){
+                        parent[u]=minValNode;       //mark it's parent
+                        key[u]=w;
+                    }
+               }
+       }
+       return ans;
+    }

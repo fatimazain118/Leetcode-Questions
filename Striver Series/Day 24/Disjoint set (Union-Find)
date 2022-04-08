@@ -1,0 +1,15 @@
+int find(int A[],int X)
+{
+   if(A[X] == X) return (X);          //if node is itself a parent return it 
+   return  A[X] = find(A,A[X]);      //also doing path compression, storing the parents value directly777777
+}
+void unionSet(int A[],int X,int Z)
+{
+   X = find(A,X);       //finding parent of both
+   Z = find(A,Z);
+   A[X] = Z;              //parent of X is attached with parent of Z
+}
+
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)

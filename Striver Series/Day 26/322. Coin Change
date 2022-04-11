@@ -1,0 +1,124 @@
+// Greedy method will fail here as there is no uniformity like sequence is not increasing not decreasing 
+
+//Trying out all combos to form target --> knapsack
+//Take the combo having min coin
+
+int f(int idx, int target, vector<int> &coins, vector<vector<int>> &dp){
+    
+     if(idx == 0){
+         if(target % coins[0] == 0)  return target / coins[0];
+         return 1e9;                                                //not writting INT_MAX to avoid overflow
+     }
+    
+    if(dp[idx][target] != -1)  return dp[idx][target];
+    
+    int notTake = 0 + f(idx-1, target, coins, dp);
+    int take = INT_MAX;
+    
+    if(coins[idx] <= target){
+        take = 1 + f(idx, target - coins[idx], coins, dp);
+    }
+    
+    return dp[idx][target] = min(take, notTake);
+}
+
+class Solution {
+public:
+    
+        int coinChange(vector<int>& coins, int amount){
+            int n = coins.size();
+            vector<vector<int>> dp(n, vector<int>(amount+1,-1));
+            
+            int mincoins = f(n-1, amount, coins,dp);
+            if(mincoins >= 1e9)  return -1;
+            return mincoins;
+    }
+  
+};
+
+Time Complexity: O(N*T)
+
+Reason: There are N*T states therefore at max ‘N*T’ new problems will be solved.
+
+Space Complexity: O(N*T) + O(N)
+
+Reason: We are using a recursion stack space(O(N)) and a 2D array ( O(N*T)).
+________________________________________________________________________________________
+//Tabulation
+
+int minimumElements(vector<int>& arr, int T){
+    
+    int n= arr.size();
+    
+    vector<vector<int>> dp(n,vector<int>(T+1,0));
+    
+    for(int i=0; i<=T; i++){
+        if(i%arr[0] == 0)  
+            dp[0][i] = i/arr[0];
+        else dp[0][i] = 1e9;
+    }
+    
+    for(int ind = 1; ind<n; ind++){
+        for(int target = 0; target<=T; target++){
+            
+            int notTake = 0 + dp[ind-1][target];
+            int take = 1e9;
+            if(arr[ind]<=target)
+                take = 1 + dp[ind][target - arr[ind]];
+                
+             dp[ind][target] = min(notTake, take);
+        }
+    }
+    
+    int ans = dp[n-1][T];
+    if(ans >=1e9) return -1;
+    return ans;
+}
+
+Time Complexity: O(N*T)
+
+Reason: There are two nested loops
+
+Space Complexity: O(N*T)
+
+Reason: We are using an external array of size ‘N*T’. Stack Space is eliminated.
+_____________________________________________________________________________________________
+// Space Optimization
+
+int minimumElements(vector<int>& arr, int T){
+    
+    int n= arr.size();
+    
+    vector<int> prev(T+1,0), cur(T+1,0);
+    
+    for(int i=0; i<=T; i++){
+        if(i%arr[0] == 0)  
+            prev[i] = i/arr[0];
+        else prev[i] = 1e9;
+    }
+    
+    for(int ind = 1; ind<n; ind++){
+        for(int target = 0; target<=T; target++){
+            
+            int notTake = 0 + prev[target];
+            int take = 1e9;
+            if(arr[ind]<=target)
+                take = 1 + cur[target - arr[ind]];
+                
+             cur[target] = min(notTake, take);
+        }
+        prev = cur;
+    }
+    
+    int ans = prev[T];
+    if(ans >=1e9) return -1;
+    return ans;
+}
+
+Time Complexity: O(N*T)
+
+Reason: There are two nested loops.
+
+Space Complexity: O(T)
+
+Reason: We are using two external arrays of size ‘T+1’.

@@ -1,0 +1,93 @@
+//Top-Down
+
+bool f(int idx, int target, vector<int> &arr, vector<vector<int>> &dp){
+    if(target == 0) return true;
+    if(idx == 0)  return (arr[0] == target);
+    if(dp[idx][target] != -1)   return dp[idx][target];
+    
+    bool notTaken = f(idx-1, target, arr, dp);
+    bool take = false;
+    if(arr[idx] <= target)  take = f(idx-1, target-arr[idx], arr, dp);
+    
+    return dp[idx][target] = take | notTaken;
+}
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<vector<int>> dp(n, vector<int>(sum+1, -1));
+        
+        return f(n-1, sum, arr, dp);
+    }
+    
+Time Complexity: O(N*K)
+
+Reason: There are N*K states therefore at max ‘N*K’ new problems will be solved.
+
+Space Complexity: O(N*K) + O(N)
+
+Reason: We are using a recursion stack space(O(N)) and a 2D array ( O(N*K)).    
+__________________________________________________________________________________________
+//Bottom-Up
+
+ bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<vector<bool>> dp(n, vector<bool>(sum+1, 0));
+        
+        //base case
+        for(int i; i<n; i++)  dp[i][0] = true;
+        if(arr[0]<=sum)   dp[0][arr[0]] = true;
+        
+        for(int idx=1; idx<n; idx++){
+            for(int target=1; target<=sum; target++){
+                
+                bool notTaken = dp[idx-1][target];
+                bool take = false;
+                if(arr[idx] <= target)  take = dp[idx-1][target-arr[idx]];
+    
+                dp[idx][target] = take || notTaken;
+            }
+        }
+        return dp[n-1][sum];
+    }
+    
+Time Complexity: O(N*K)
+
+Reason: There are two nested loops
+
+Space Complexity: O(N*K)
+
+Reason: We are using an external array of size ‘N*K’. Stack Space is eliminated.   
+
+_________________________________________________________________________
+Space Optimization
+
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<bool> prev(sum+1, 0), cur(sum+1, 0);
+        prev[0] = cur[0] = true;
+         
+        //base case
+        prev[0] = cur[0] = true;
+        if(arr[0]<=sum)   prev[arr[0]] = true;
+        
+        for(int idx=1; idx<n; idx++){
+            for(int target=1; target<=sum; target++){
+                
+                bool notTaken = prev[target];
+                bool take = false;
+                if(arr[idx] <= target)  take = prev[target-arr[idx]];
+    
+                cur[target] = take || notTaken;
+            }
+            prev = cur;
+        }
+        return prev[sum];
+    }
+    
+ Time Complexity: O(N*K)
+
+Reason: There are three nested loops
+
+Space Complexity: O(K)
+
+Reason: We are using an external array of size ‘K+1’ to store only one row.   
+____________________________________________________________________________________    

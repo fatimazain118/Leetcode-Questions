@@ -1,0 +1,49 @@
+//Same as Subset Sum
+//Space optimisation Code
+
+class Solution {
+public:
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<bool> prev(sum+1, 0), cur(sum+1, 0);
+        prev[0] = cur[0] = true;
+         
+        //base case
+        prev[0] = cur[0] = true;
+        if(arr[0]<=sum)   prev[arr[0]] = true;
+        
+        for(int idx=1; idx<n; idx++){
+            for(int target=1; target<=sum; target++){
+                
+                bool notTaken = prev[target];
+                bool take = false;
+                if(arr[idx] <= target)  take = prev[target-arr[idx]];
+    
+                cur[target] = take || notTaken;
+            }
+            prev = cur;
+        }
+        return prev[sum];
+    }
+    
+    bool canPartition(vector<int>& nums) {
+        int totSum = 0;
+        int n = nums.size();
+        for(int i=0; i<n; i++){
+            totSum += nums[i];
+        }
+        
+        if(totSum % 2)  return false;
+        int target = totSum / 2;
+        
+        return isSubsetSum(nums, target);
+    }
+};
+
+Time Complexity: O(N*K) +O(N)
+
+Reason: There are two nested loops that account for O(N*K) and at starting we are running a for loop to calculate totSum.
+
+Space Complexity: O(K)
+
+Reason: We are using an external array of size ‘K+1’ to store only one row.

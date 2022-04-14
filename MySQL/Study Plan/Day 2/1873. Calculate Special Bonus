@@ -1,0 +1,20 @@
+# Pattern matching using SQL simple regular expression comparison. Returns 1 (TRUE) or 0 (FALSE). If either expr or pat is NULL, the result is NULL.
+
+#Case
+Go through conditions and return a value when the first condition is met:
+The CASE statement goes through conditions and return a value when the first condition is met (like an IF-THEN-ELSE statement). So, once a condition is true, it will stop reading and return the result.
+
+If no conditions are true, it will return the value in the ELSE clause.
+
+If there is no ELSE part and no conditions are true, it returns NULL.
+
+____________________________________________________________________________________________
+
+Select employee_id,
+case
+   when employee_id % 2 != 0 and name not like "M%" then salary
+   else 0
+end as bonus
+
+from Employees
+order by employee_id

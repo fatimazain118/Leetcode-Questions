@@ -1,0 +1,25 @@
+  bool isPowerOfTwo(int n) {
+        if(n == 0)  return false;
+        while(n != 1){
+            if(n%2 != 0) return false;
+            n = n/2;
+        }
+        return true;
+    }
+    
+    //O(LogN)
+    ____________________________________________________
+     if(n == 0)  return false;
+     return (ceil(log2(n)) == floor(log2(n)));
+     
+     //O(1)
+     _____________________________________________________
+     3rd- Approach is count no. of set bits
+     // As in power of 2 no. of set bits will be only 1
+     
+  ________________________________________________________________
+  AND of n and (n-1) no. will always be zero when no. is in power of 2
+  
+  return n>0 && !(n&(n-1));
+  
+  O(1)

@@ -1,0 +1,20 @@
+//we are doing reverse inorder traversal
+//and printing the value of sum each tym at nodes
+
+class Solution {
+public:
+    int sum=0;
+    void inorder(TreeNode* root){
+        if(root==NULL)  return;
+        
+        inorder(root->right);
+        sum+=root->val;
+        root->val = sum;
+        inorder(root->left);
+    }
+    
+    TreeNode* convertBST(TreeNode* root) {
+      inorder(root);
+        return root;
+    }
+};

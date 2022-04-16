@@ -1,0 +1,111 @@
+Call By Value: In this parameter passing method, values of actual parameters are copied to function’s formal parameters and the two types of parameters are stored 
+in different memory locations. So any changes made inside functions are not reflected in actual parameters of the caller.
+
+//C++
+//While calling a function, we pass values of variables to it. Such functions are known as “Call By Values”.
+//In this method, the value of each variable in calling function is copied into corresponding dummy variables of the called function.
+//With this method, the changes made to the dummy variables in the called function have no effect on the values of actual variables in the calling function.
+
+#include <iostream>
+using namespace std;
+
+void swap(int a, int b){
+    int temp;
+     temp = a;
+     a = b;
+     b = temp;
+     cout<<"a is : "<<a<<", b is : "<<b<<endl;
+}
+int main() {
+    int a = 2;
+    int b = 3;
+    
+    cout<<"a is : "<<a<<", b is : "<<b<<endl;
+    swap(a,b);
+    return 0;
+}
+_____________________________________________
+a is : 2, b is : 3
+a is : 3, b is : 2
+________________________________________________
+// C
+
+#include <stdio.h>
+
+void swap(int a, int b);
+
+int main() {
+    int a = 2;
+    int b = 3;
+    
+    swap(a,b);
+    printf("In Main : a is : %d, b is : %d", a, b);
+    return 0;
+}
+
+void swap(int a, int b){
+    int temp;
+     temp = a;
+     a = b;
+     b = temp;
+     printf("a is : %d, b is : %d\n", a, b);
+}
+___________________________________________________________________
+a is : 3, b is : 2
+In Main : a is : 2, b is : 3
+________________________________________________________________
+Call by Reference: Both the actual and formal parameters refer to the same locations, so any changes made inside the function are actually reflected in actual 
+parameters of the caller.
+
+// While calling a function, instead of passing the values of variables, we pass address of variables(location of variables) to the function known as 
+“Call By References.
+//In this method, the address of actual variables in the calling function are copied into the dummy variables of the called function.
+//With this method, using addresses we would have an access to the actual variables and hence we would be able to manipulate them.
+
+// C++
+
+#include <iostream>
+using namespace std;
+
+void swap(int *a, int *b){
+    int temp;
+     temp = *a;
+     *a = *b;
+     *b = temp;
+     cout<<"a is : "<<*a<<", b is : "<<*b<<endl;
+}
+int main() {
+    int a = 2;
+    int b = 3;
+    
+    swap(&a, &b);
+    cout<<"a is : "<<a<<", b is : "<<b<<endl;
+    return 0;
+}
+__________________________________________________________
+a is : 3, b is : 2
+a is : 3, b is : 2
+__________________________________________________________
+#include <stdio.h>
+
+void swap(int *, int *);
+
+int main() {
+    int a = 2;
+    int b = 3;
+    
+    swap(&a, &b);
+    printf("In Main : a is : %d, b is : %d", a, b);
+    return 0;
+}
+
+void swap(int *a, int *b){
+    int temp;
+     temp = *a;
+     *a = *b;
+     *b = temp;
+     printf("a is : %d, b is : %d\n", *a, *b);
+}
+________________________________________________________
+a is : 3, b is : 2
+In Main : a is : 3, b is : 2

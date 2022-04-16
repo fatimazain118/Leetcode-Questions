@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 2;
+    int b = 3;
+    
+    a = a^b;
+    b = a^b;
+    a = a^b;
+    
+    cout<<"a is : "<<a<<", b is : "<<b<<endl;
+    return 0;
+}
+____________________________________________________
+a is : 3, b is : 2

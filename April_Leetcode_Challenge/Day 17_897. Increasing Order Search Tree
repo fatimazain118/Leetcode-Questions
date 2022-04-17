@@ -1,0 +1,20 @@
+class Solution {
+public:
+    TreeNode* head = new TreeNode(0);         //for making new root and will traverse though the tree
+    TreeNode *ptr = head;                     //This will store pointer to head
+    
+    void recursive(TreeNode* root){
+        if(root==NULL){
+            return;
+        }
+        recursive(root->left);
+        head->right = new TreeNode(root->val);        //make new node at head's right and store value
+        head = head->right;
+        recursive(root->right); 
+    }
+    
+    TreeNode* increasingBST(TreeNode* root) {
+        recursive(root);
+        return ptr->right;          //so that it return 1 in root's value
+        }
+};

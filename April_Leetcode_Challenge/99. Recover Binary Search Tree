@@ -1,0 +1,36 @@
+class Solution {
+private:
+    TreeNode* first;
+    TreeNode* prev;
+    TreeNode* mid;
+    TreeNode* last;
+    
+ private: 
+    void inorder(TreeNode* root){
+        if(root == NULL) return;
+        
+        inorder(root->left);
+        
+        if(prev != NULL && (root->val < prev->val)){      //current node is smaller than the prev
+            if(first == NULL){
+                first = prev;
+                mid = root;
+            }
+            
+            //means it's 2nd voilation
+            else{
+                last = root; 
+            }
+        }
+            prev = root;
+            inorder(root->right);
+    }
+ public:   
+    void recoverTree(TreeNode* root) {
+        first = mid = last = NULL;
+        prev = new TreeNode(INT_MIN);
+        inorder(root);
+        if(first && last)  swap(first->val, last->val);
+        else if(first && mid)  swap(first->val, mid->val);
+    }
+};

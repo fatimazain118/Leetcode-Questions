@@ -1,0 +1,33 @@
+// O(N)
+
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n<=2) return n;
+        
+        int x=1, y=2;
+        for(int i=3; i<=n; ++i){
+            int temp = y;
+            y += x;
+            x = temp;
+        }
+        return (y);
+    }
+};
+________________________________________________________________________
+//Top-Down
+
+class Solution {
+public:
+    int climbStairs(int n) {
+     vector<int> dp(n+1);
+        
+        for(int i=1; i<=n; i++){
+          if(i==2 || i==1)  
+              dp[i] = i;
+            else
+                dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+};

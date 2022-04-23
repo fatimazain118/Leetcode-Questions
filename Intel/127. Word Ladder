@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> dict(wordList.begin(), wordList.end());   // to search in O(1)
+        queue<pair<string, int>> todo;       //current string and count
+        todo.push({beginWord, 1});
+       
+        //classic BFS
+        while(!todo.empty()){
+            pair<string, int> p = todo.front();
+            string word = p.first;
+            int ladder = p.second;
+            todo.pop();              //so that next element become first
+            if(word==endWord){
+                return ladder;
+            }
+            dict.erase(word);
+            
+            //Traversing on each letter
+            for(int j=0; j<word.size(); j++){
+                char c = word[j];            //for each letter
+                
+                for(int k=0; k<26; k++){       //change it to a-z
+                    word[j] = 'a' + k;
+                    
+                    if(dict.find(word) != dict.end()){
+                        todo.push({word, ladder+1});        //if matches push it into queue
+                    }
+                } 
+                word[j] = c;          //if matches replace it with current word
+            }
+        }
+       return 0;  
+    }
+};

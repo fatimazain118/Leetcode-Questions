@@ -1,0 +1,27 @@
+class UndergroundSystem {
+public:
+    unordered_map<int, pair<string, int>> checkInM;        //id, pair(stationName, time)
+    unordered_map<string, pair<int, int>> path;
+    
+    UndergroundSystem() {
+    }
+    
+    void checkIn(int id, string stationName, int t) {
+        checkInM[id] = {stationName, t};
+    }
+    
+    void checkOut(int id, string stationName, int t) {
+        auto checkIn = checkInM[id];
+        checkInM.erase(id);
+        
+        string pathName = checkIn.first + "_" + stationName;
+        path[pathName].first += t - checkIn.second;
+        path[pathName].second += 1;
+    }
+    
+    double getAverageTime(string startStation, string endStation) {
+        string routeName = startStation + "_" + endStation;
+        auto &route = path[routeName];
+        return (double) route.first / route.second;
+    }
+};

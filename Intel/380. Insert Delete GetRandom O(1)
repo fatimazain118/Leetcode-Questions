@@ -1,0 +1,33 @@
+class RandomizedSet {
+public:
+    vector<int> v;
+    unordered_map<int,int> mymap;
+    
+    RandomizedSet() {
+        
+    }
+    
+    bool insert(int val) {
+        if(mymap.find(val) != mymap.end())
+            return false;                   //if present don't insert it
+        v.push_back(val);
+        mymap[val] = v.size()-1;         //updating a map with a new entry
+        return true;
+    }
+    
+    bool remove(int val) {
+        if(mymap.find(val) == mymap.end())
+            return false;
+        
+        auto it = mymap.find(val);     //finding it's index, it is storing key, index
+        v[it->second] = v.back();     // replacing with last element
+        v.pop_back();       //deleting the last element
+        mymap[v[it->second]] = it->second;          //updating index
+        mymap.erase(val);
+        return true;
+    }
+    
+    int getRandom() {
+        return v[rand() % v.size()];        //to generate random no. in the range
+    }
+};

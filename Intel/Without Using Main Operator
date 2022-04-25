@@ -1,0 +1,37 @@
+#include <stdio.h> 
+
+ //Addition without using + Operator
+// int main(void){ 
+// int x = 7;
+// int y = 3;
+
+// while(y!=0){
+//     x++;
+//     y--;
+// }
+// printf("Addition is %d",x);
+// return 0; 
+// }
+
+//Sub without using - Operator
+
+// int main(void){ 
+// int x = 7;
+// int y = 3;
+// int sub;
+
+// //sub = ~y;           //1's complement
+// //sub = sub+1;         //2's complement
+
+// sub = x + ~y + 1;
+// printf("Sub is %d",sub);
+// return 0; 
+
+
+//Multiply an Integer Number by 2 Without Using Multiplication Operator
+int main(void){ 
+int x = 7;
+x = x<<1;          //to multiply it by 4 use x<<2
+printf("%d", x);
+return 0;
+}

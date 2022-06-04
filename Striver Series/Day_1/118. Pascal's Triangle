@@ -1,3 +1,6 @@
+//To Calculate particular element in pascal triangle - R-1^ C ^c-1
+//ayu
+
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {

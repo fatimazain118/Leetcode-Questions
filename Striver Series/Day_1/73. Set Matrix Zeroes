@@ -1,3 +1,8 @@
+//B.F - Take another matrix in that set zero corresponding to original matrix. T.C - O(1) , S.C - O(m*n)
+//2nd Approach - Take 1D array for rows and col for storing index of zero, and make that corresponding row and col zero's
+//3rd Approach - Take 2 markers and check if there are any zero's in them if so take x=0, and y=0 correspondingly
+//Then solve for 3*3 matrix and corresponding to that put zero in the marker
+
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {   //here we are passing by reference so no need to return anything, as changes will be save itself
@@ -19,7 +24,7 @@ public:
             }
         }
         
-        //checking for inner matrix
+        //checking for inner matrix, and make zero in the marker
         for(int i=1;i<rows;i++){
             for(int j=1;j<col;j++){
                 if(matrix[i][j]==0){

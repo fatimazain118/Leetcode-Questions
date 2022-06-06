@@ -1,3 +1,12 @@
+//Brute Force - Sort the array, then check if arr[i] == arr[i+1] ---O(nlogN)
+
+//2nd Approach 
+// 1. Use frequency array assign everything by 0
+// 2. while traversing mark in array 1(as visited) so when we get another occurrence then we would already have marked 1 array
+//T.C - O(N)
+//S.C - O(N)
+
+
 Intuition: Since there is a duplicate number, we can always say that cycle will be formed.
 
 //The slow pointer moves by one step and the fast pointer moves by 2 steps and there exists a cycle so the first collision is bound to happen.

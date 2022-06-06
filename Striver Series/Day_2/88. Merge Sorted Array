@@ -65,7 +65,8 @@ Space Complexity: O(n)
 ______________________________________________________________________________
 Solution 2: Without using space-
 
-Intuition: We can think of Iterating in arr1 and whenever we encounter an element that is greater than the first element of arr2, just swap it. Now rearrange the arr2 in a sorted manner, after completion of the loop we will get elements of both the arrays in non-decreasing order.
+Intuition: We can think of Iterating in arr1 and whenever we encounter an element that is greater than the first element of arr2, just swap it. Now rearrange the
+arr2 in a sorted manner, after completion of the loop we will get elements of both the arrays in non-decreasing order.
 
 #include<bits/stdc++.h>
 
@@ -86,8 +87,12 @@ void merge(int arr1[], int arr2[], int n, int m) {
     // then sort the second array
     // put the element in its correct position
     // so that next cycle can swap elements correctly
+   
+    // insertion sort is used here, coz we are having assumtion that our both array are sorted, after each comparing sort arr2
+    //insertion sort in based on the fact that insert an element from an unsorted array to it's correct possition in sorted array
+    //starting from 2nd element as element is assume to be sorted
+    
     int first = arr2[0];
-    // insertion sort is used here
     for (k = 1; k < m && arr2[k] < first; k++) {
       arr2[k - 1] = arr2[k];
     }
@@ -131,6 +136,8 @@ Time complexity: O(n*m)
 
 Space Complexity: O(1) 
 ________________________________________________________________________________________
+//other
+
 Solution 3: Two Pointer approach
 class Solution {
 public:

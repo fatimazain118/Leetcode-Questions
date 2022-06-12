@@ -1,0 +1,32 @@
+// class Solution {
+// public:
+//     bool containsNearbyDuplicate(vector<int>& nums, int k) {
+//        vector<int> v(10001, -1);
+        
+//         for(int i=0; i<nums.size(); i++){
+//             for(int j=i+1; j<nums.size(); j++){
+//                 if(nums[i]==nums[j] && abs(i-j) <= k){
+//                     return true;
+//                 }
+//             }
+//         }
+//         return false;
+//     }
+// };
+
+class Solution {
+public:
+    bool containsNearbyDuplicate(vector<int>& nums, int k) {
+      	unordered_map<int,int> map;
+        
+    for(int i=0;i<nums.size();i++){
+			if(map.find(nums[i])!=map.end()){        //if repeated element
+				if(abs(map[nums[i]]-i)<=k)                //abs(prev index - curr index) <=k then true
+					return true;
+        }
+		map[nums[i]]=i;        //insert values with index  
+    }
+    
+    return false;
+    }
+};

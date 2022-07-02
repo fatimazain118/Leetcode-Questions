@@ -1,6 +1,7 @@
 Solution 1: Naive Approach
 
-Intuition: We can traverse through the Linked List while maintaining a count of nodes let’s say in variable n , and then traversing for 2nd time for n/2 nodes to get to the middle of the list.
+Intuition: We can traverse through the Linked List while maintaining a count of nodes let’s say in variable n , and then traversing for 2nd time for n/2 nodes
+to get to the middle of the list.
 
 class Solution {
 public:
@@ -27,7 +28,9 @@ S.C - O(1)
 ________________________________________________________________________________________________
 Solution 2: [Efficient] Tortoise-Hare-Approach
 
-Intuition: In the Tortoise-Hare approach, we increment slow ptr by 1 and fast ptr by 2, so if take a close look fast ptr will travel double than that of the slow pointer. So when the fast ptr will be at the end of Linked List, slow ptr would have covered half of Linked List till then. So slow ptr will be pointing towards the middle of Linked List.
+Intuition: In the Tortoise-Hare approach, we increment slow ptr by 1 and fast ptr by 2, so if take a close look fast ptr will travel double than that of the slow
+pointer. So when the fast ptr will be at the end of Linked List, slow ptr would have covered half of Linked List till then. So slow ptr will be pointing towards the
+middle of Linked List.
 
 class Solution {
 public:

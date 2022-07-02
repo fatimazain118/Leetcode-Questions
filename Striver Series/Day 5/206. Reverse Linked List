@@ -27,18 +27,19 @@ To perform given tasks, no external spaces are used except three-pointers. So, s
 ___________________________________________________________________________________________________________________
 
 Recursive
+// Entire List will be pass to the recursive function, so just reverse the pointers of first two node
 
 class Solution {
 public:
     ListNode* reverseList(ListNode* &head) {
-       if(head == NULL or head->next == NULL){
+       if(head == NULL or head->next == NULL){            //base case
            return head;
        }
         
         ListNode* n = reverseList(head->next);
-        head->next->next = head;
+        head->next->next = head;                  // reversing the pointer
         head->next = NULL;
-        return n;
+        return n;                             // return the new headnode
      }
 };
 

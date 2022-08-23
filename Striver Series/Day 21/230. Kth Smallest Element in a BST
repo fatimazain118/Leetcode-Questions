@@ -1,3 +1,9 @@
+//We can do any DFS traversals (like inorder)
+// 1st approach can be - put all the nodes inside a containner O(N) than sort that O(NlogN) then extract the kth element
+// 2nd approach can be - When we do inorder traversal store it in a particular container this approach will give you extra of O(N) space to store every element in container
+
+//3rd approach - store only kth element in the stack 
+
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
@@ -8,11 +14,11 @@ public:
         while(true){
             if(node!=NULL){
                 s.push(node);
-                node = node->left;
+                node = node->left;             //go to the lefmost of the tree
             }
             else{
                 if(s.empty() == true) break;
-                node = s.top();
+                node = s.top();              node pointer is pointing to the top of stack
                 s.pop();
                 //inorder.push_back(node->val);
                 count++;

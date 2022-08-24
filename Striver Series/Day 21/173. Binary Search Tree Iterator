@@ -1,3 +1,11 @@
+//1st approach can be storing the inorder traversal in vector and excessing it from there
+//S.c - O(N) to store
+//T.c - O(N) + O(N)
+
+//2nd approach - Take a stack data structure start pushing all the left elements into the stack 
+// whenever the next function invokes pop out the top of the stack(which you have pointed with temp variable)
+//for hasnext just check wheather the stack is empty or not
+
 class BSTIterator {
 private:  stack<TreeNode*> s;
 public:
@@ -22,4 +30,4 @@ public:
 };
 
 //T.C- O(N)
-//S.C- O(H)
+//S.C- O(H) as at a time we are only inserting the left side of the node

@@ -33,6 +33,9 @@ T.C - O(N) Travelling to all nodes
 S.C - O(N) for storing inorder traversal
 _________________________________________________________________________
 //This approach takes more time
+// https://www.youtube.com/watch?v=xMvhRaFCw2M&t=2s
+
+//approach-> Start storing the node's value in a set also check if (Target- that no.) is already present in the set or not
 T.C - O(H)
 S.C - O(1)
 
@@ -44,7 +47,7 @@ set<int> s;   //should be declare out not inside else give error
     
         if(!root) return false;
         
-        if(s.find(k-root->val) != s.end()) //fidind that the element is already present inside the set or not if it has                                                  //reaced end then means not present
+        if(s.find(k-root->val) != s.end()) //fidind that the element is already present inside the set or not if it has     //reaced end then means not present
             return true;
         s.insert(root->val);    //if not present in set insert
         

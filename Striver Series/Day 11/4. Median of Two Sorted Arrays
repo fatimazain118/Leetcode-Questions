@@ -1,3 +1,6 @@
+//Median -> odd - [(n+1)/2] - 1
+         -> even - [(n/2)-1] + (n/2)] / 2
+
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
@@ -46,14 +49,14 @@ ________________________________________________________________________________
 class Solution {
 public:
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-      if(nums2.size() < nums1.size())  return findMedianSortedArrays(nums2, nums1);
+      if(nums2.size() < nums1.size())  return findMedianSortedArrays(nums2, nums1);        //In order to do binary search in smaller size array
         int n1 = nums1.size();
         int n2 = nums2.size();
-        int low = 0, high = n1;
+        int low = 0, high = n1;       //high coz at max how many elements we can take from nums1
         
         while(low <= high){
-            int cut1 = (low+high)/2;
-            int cut2 = (n1+n2+1)/2 -cut1;
+            int cut1 = (low+high)/2;          // or >> 1      cut1 is fixing on nums1
+            int cut2 = (n1+n2+1)/2 -cut1;     //valid for both odd and even length
             
             int left1 = cut1 == 0 ? INT_MIN : nums1[cut1-1];
             int left2 = cut2 == 0 ? INT_MIN : nums2[cut2-1];

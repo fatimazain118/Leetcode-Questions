@@ -1,5 +1,45 @@
 //B.F - Take another matrix in that set zero corresponding to original matrix. T.C - O(1) , S.C - O(m*n)
+
 //2nd Approach - Take 1D array for rows and col for storing index of zero, and make that corresponding row and col zero's
+
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& matrix) {
+        int n=matrix.size();
+        int m=matrix[0].size();
+        //first create the dummy vector to store the index where the value is zero 
+        vector<int>dummy1(n,-1);
+        //this vector will store the row 
+       
+       vector<int>dummy2(m,-1);
+        //this will store the column index
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if(matrix[i][j]==0)
+                {
+                    dummy1[i]=0;
+                    dummy2[j]=0;
+                }
+            }
+        }
+        //in this above for loop condition we will store the value as the index where the value is 0 means we will have to make 0 at that index 
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<m;j++)
+            {
+                if((dummy1[i]==0)||(dummy2[j]==0))//if any of one condition is true make that matrix element equal to 0
+                {
+                    matrix[i][j]=0;
+                }
+            }
+        }
+        
+    }
+};
+
 //3rd Approach - Take 2 markers and check if there are any zero's in them if so take x=0, and y=0 correspondingly
 //Then solve for 3*3 matrix and corresponding to that put zero in the marker
 

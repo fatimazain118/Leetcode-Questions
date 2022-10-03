@@ -1,4 +1,5 @@
-//Solution 1: Sorting ( even if it is not the expected solution here but it can be considered as one of the approach ). Since the array contains only 3 integers, 0, 1, and 2. Simply sorting the array would arrange the elements in increasing order.
+//Solution 1: Sorting ( even if it is not the expected solution here but it can be considered as one of the approach ). Since the array contains only 3 integers, 0,
+1, and 2. Simply sorting the array would arrange the elements in increasing order.
 
 class Solution {
 public:
@@ -16,7 +17,8 @@ Space Complexity: O(1)
 ________________________________________
 Solution 2: Keeping count of values (Counting Sort)
 
-Intuition: Since in this case there are only 3 distinct values in the array so it’s easy to maintain the count of all, Like the count of 0, 1, and 2. This can be followed by overwriting the array based on the frequency(count) of the values.
+Intuition: Since in this case there are only 3 distinct values in the array so it’s easy to maintain the count of all, Like the count of 0, 1, and 2. This can be 
+followed by overwriting the array based on the frequency(count) of the values.
 
 Approach: 
 
@@ -63,7 +65,10 @@ Time Complexity: O(N) + O(N)
 Space Complexity: O(1)
 __________________________________________________________________
 
-//Optimized
+//Optimized -- It's pre-defined algo though which we can sort in one pass
+// Assumption was that all the thing before low will be 0's
+// All the elements to the right of high will be 2's
+// and between low and mid there will be 1's
 
 class Solution {
 public:

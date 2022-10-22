@@ -33,7 +33,7 @@ if c2 is 0, so we assign num2 = ele.
 In all the other cases we decrease both c1 and c2.
 
 Code : 
- class Solution {
+class Solution {
 public:
     vector<int> majorityElement(vector<int>& nums) {
       int n = nums.size();
@@ -54,17 +54,17 @@ public:
                 num2 = nums[i];
                 count2 = 1;
             }
-            else{
+            else{            
                 count1--;
                 count2--;
             }
         }
-        vector<int> ans;
+        vector<int> ans;         //from above we'll get 2 ans now check for n/3 condition
         count1 = count2 = 0;
         
         for(int i=0; i<n; i++){
-            if(nums[i] == num1)  count1++;
-            else if(nums[i] ==  num2)   count2++;
+            if(nums[i] == num1)  count1++;             //checking the count of num1
+            else if(nums[i] ==  num2)   count2++;      //checking the count of num2
         }
         if(count1 > n/3)  ans.push_back(num1);
         if(count2 > n/3)  ans.push_back(num2);

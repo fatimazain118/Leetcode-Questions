@@ -8,7 +8,7 @@ public:
         if(nums.size() == 0)  return 0;
         
         sort(nums.begin(), nums.end());
-        int count = 1;
+        int count = 1;                  //coz even 1 element has sequence 1
         int prev = nums[0];
         int ans = 1;
         
@@ -16,21 +16,24 @@ public:
             if(nums[i] == prev + 1){
                 count++;
             }
-            else if(nums[i] != prev){
+            else if(nums[i] != prev){           // if we have same elements
                 count = 1;
             }
             prev = nums[i];
-            ans = max(ans, count);       //to check various max sequence
+            ans = max(ans, count);       //to check max sequence, from all the sequences
         }
         return ans;
     }
 };
 
-Time Complexity: We are first sorting the array which will take O(N * log(N)) time and then we are running a for loop which will take O(N) time. Hence, the overall time complexity will be O(N * log(N)).
+Time Complexity: We are first sorting the array which will take O(N * log(N)) time and then we are running a for loop which will take O(N) time. Hence, the overall 
+time complexity will be O(N * log(N)).
 Space Complexity: The space complexity for the above approach is O(1) because we are not using any auxiliary spac
 ______________________________________________________________________________
 Solution 2: (Optimal Approach)
-Approach: We will first push all are elements in the HashSet. Then we will run a for loop and check for any number(x) if it is the starting number of the consecutive sequence by checking if the HashSet contains (x-1) or not. If ‘x’ is the starting number of the consecutive sequence we will keep searching for the numbers y = x+1, x+2, x+3, ….. And stop at the first ‘y’ which is not present in the HashSet. Using this we can calculate the length of the longest consecutive subsequence. 
+Approach: We will first push all are elements in the HashSet. Then we will run a for loop and check for any number(x) if it is the starting number of the consecutive
+sequence by checking if the HashSet contains (x-1) or not. If ‘x’ is the starting number of the consecutive sequence we will keep searching for the numbers 
+y = x+1, x+2, x+3, ….. And stop at the first ‘y’ which is not present in the HashSet. Using this we can calculate the length of the longest consecutive subsequence. 
 
 Code:
 class Solution {

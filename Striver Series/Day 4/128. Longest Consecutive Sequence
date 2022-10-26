@@ -17,7 +17,7 @@ public:
                 count++;
             }
             else if(nums[i] != prev){           // if we have same elements
-                count = 1;
+                count = 1;                  //to start new sequence if they are not in ascending order
             }
             prev = nums[i];
             ans = max(ans, count);       //to check max sequence, from all the sequences
@@ -47,12 +47,12 @@ public:
         int ans = 0;
         
         for(int num : nums){
-            if(!hashSet.count(num-1)){
-                int curr = num;
+            if(!hashSet.count(num-1)){      //checking for 1 lesser element in hashSet, if not present 
+                int curr = num;             // make that no. as curr
                 int count = 1;
                 
-                while(hashSet.count(curr+1)){
-                    curr++;
+                while(hashSet.count(curr+1)){           //then check for it's next no. in hashSet
+                    curr++;                             // if present check for it's next untill the next no. is absent from the hashSet
                     count++;
                 }
                 

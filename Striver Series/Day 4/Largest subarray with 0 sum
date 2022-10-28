@@ -31,19 +31,21 @@ class Solution{
     int maxLen(vector<int>&A, int n)
     {   
         int currmax = 0;
-        unordered_map<int,int> m;
+        unordered_map<int,int> m;         //to store the prefix sum, and upto which index sum is zero
         int sum = 0;
+        
         for(int i=0; i<n; i++){
             sum += A[i];
-            if(sum == 0){
-                currmax = i+1;
+            
+            if(sum == 0){          
+                currmax = i+1;       //if sum will be zero count will be i+1 of maxsubarray
             }
             else{
-                if(m.find(sum) != m.end()){
-                    currmax = max(currmax, i-m[sum]);
+                if(m.find(sum) != m.end()){                   //find the sum is already present in the map
+                    currmax = max(currmax, i-m[sum]);         
                 }
                 else{
-                    m[sum] = i;
+                    m[sum] = i;            //store sum and index
                 }
             }
         }

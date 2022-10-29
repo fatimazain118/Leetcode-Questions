@@ -47,8 +47,8 @@ public:
         for(int r=0; r<s.length(); r++){
             
           if(set.find(s[r]) != set.end()){
-                    while(left<r && set.find(s[r]) != set.end()){    //if char exist
-                    set.erase(s[left]);                             //start removing char from left
+                    while(left<r && set.find(s[r]) != set.end()){    //if char still exit in set
+                    set.erase(s[left]);                             //start removing char from set and move left
                     left++;                                          
                  }
             }
@@ -79,7 +79,7 @@ public:
         int n = s.size();
         int len = 0;
         while(right < n){
-            if(map[s[right]] != -1){    //exist
+            if(map[s[right]] != -1){                   //exist
                 left = max(map[s[right]]+1, left);     //jo pehle first occurence me milla tha usse ek agye
             }
             map[s[right]] = right;                  //update in map last occurence , after updating left

@@ -1,3 +1,5 @@
+// This approach uses 3 pointer + Binary Search
+
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& nums, int target) {
@@ -10,10 +12,10 @@ public:
             for(int j=i+1; j<n; j++){
                 for(int k=j+1; k<n; k++){
                     
-                    int x = (long long)target - (long long)nums[i] - (long long)nums[j] - (long long)nums[k];
+                    int x = (long long)target - (long long)nums[i] - (long long)nums[j] - (long long)nums[k];   //searching for x though BS
                     
-                    if(binary_search(nums.begin()+k+1, nums.end(), x)){
-                        vector<int> v;
+                    if(binary_search(nums.begin()+k+1, nums.end(), x)){          //using BS C++ STL function, x is no. to search though BS, if element is found it'll return true
+                        vector<int> v;                           // declaring out side for giving error
                         
                         v.push_back(nums[i]);
                         v.push_back(nums[j]);
@@ -34,6 +36,8 @@ Time Complexity: O(N log N + N³ logN)
 Reason: Sorting the array takes N log N and three nested loops will be taking N³ and for binary search, it takes another log N.
 Space Complexity: O(M * 4), where M is the number of quads
 ___________________________________________________________________________________________________________________________________________
+// Run two for loop i, j then on remaining do two sum
+
 Solution 2: Optimized Approach
 
 class Solution {
@@ -44,8 +48,9 @@ public:
         
         if (num.empty())
             return res;
+            
         int n = num.size(); 
-        sort(num.begin(),num.end());
+        sort(num.begin(),num.end());             // to do two sum
     
         for (int i = 0; i < n; i++) {
         
@@ -53,12 +58,12 @@ public:
         
             for (int j = i + 1; j < n; j++) {
             
-                int target_2 = target_3 - num[j];
+                int target_2 = target_3 - num[j];             //target to find while doing two sum
             
                 int front = j + 1;
                 int back = n - 1;
             
-                while(front < back) {
+                while(front < back) {                       // two sum
                 
                     int two_sum = num[front] + num[back];
                 
@@ -66,7 +71,7 @@ public:
                 
                     else if (two_sum > target_2) back--;
                 
-                    else {
+                    else {                                   //if target is found
                     
                         vector<int> quadruplet(4, 0);
                         quadruplet[0] = num[i];

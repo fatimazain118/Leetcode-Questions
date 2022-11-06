@@ -1,3 +1,7 @@
+// this have only optimal solution
+// Edge cases might be -> Length of LL1 < Length of LL2, or if it's greater or equal then what will be the output
+
+
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
@@ -19,8 +23,8 @@ public:
             sum += carry;              //adding sum
             carry = sum/10;              
             ListNode* node = new ListNode(sum%10);
-            temp->next = node;        //add that new node to temp
-            temp = temp->next;
+            temp->next = node;          //add that new node to temp
+            temp = temp->next;          // then moving temp to this new node
         }
         return dummy->next;
     }

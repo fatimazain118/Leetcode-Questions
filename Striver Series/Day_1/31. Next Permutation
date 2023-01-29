@@ -55,6 +55,12 @@ public:
 // This is showing wrong ans for some of the testcases like nums = [1,1,5]
 // But works for nums = [1,2,3]
 
+The output of the above code if nums = [1,1,5] would be the next permutation of the array [1,1,5], which is [1,5,1]. However, this solution is not correct and will 
+not work correctly for all inputs. The reason for this is that the function permute will generate all the permutation of the array and return them, after that it will 
+find the next permutation of the array by comparing the permutation of the array with the original array. It will not work correctly for the edge cases where there 
+are duplicate elements in the array. Additionally, the function is generating all the permutation of the array which is very time-consuming and will not scale well 
+for large inputs.
+
 Time complexity of O(N!xN).
 ________________________________________________________________________________________________________________________________________________________________
 //2nd Approach - 

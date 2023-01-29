@@ -1,14 +1,92 @@
-//B.F - Step 1: Find all possible permutations of elements present and store them.
+//1st approach - Brute Force
+
+Step 1: Find all possible permutations of elements present and store them.
 
 Step 2: Search input from all possible permutations.
 
 Step 3: Print the next permutation present right after it.   
 
-Time complexity of O(N!xN).
+class Solution {
+public:
+    void recurPermu(vector<vector<int>> &ans, vector<int> &ds, vector<int> &nums, int freq[]){
+        //base condition
+        if(ds.size() == nums.size()){
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=0; i<nums.size(); i++){
+            if(!freq[i]){
+                ds.push_back(nums[i]);
+                freq[i] = 1;
+                recurPermu(ans, ds, nums, freq);
+                freq[i] = 0;
+                ds.pop_back();
+            }
+        }
+    }
 
+    vector<vector<int>> permute(vector<int>& nums) {                   // finding all permutations
+        vector<vector<int>> ans;
+        vector<int> ds;             //data structure which will pass during recursion
+        int freq[nums.size()];     //frequence array or map
+
+        for(int i=0; i<nums.size(); i++)
+            freq[i] = 0;               //initialising the frequency array with zero
+        recurPermu(ans, ds, nums, freq);
+        sort(ans.begin(), ans.end());
+        return ans;
+    }
+
+    void nextPermutation(vector<int>& nums) {
+        vector<vector<int>> perms = permute(nums);       // storing the ans vector
+        for(int i = 0; i < perms.size(); i++) {
+            if(perms[i] == nums) {                        //searching for the nums in that ans 2D vector
+                if(i == perms.size() - 1) {               // if i is the last index 
+                    sort(nums.begin(), nums.end());        //sorting nums only to return the first permutation
+                } else {
+                    nums = perms[i + 1];                  // else returinging it's next permutation
+                }
+                break;
+            }
+        }
+    }
+};
+
+// This is showing wrong ans for some of the testcases like nums = [1,1,5]
+// But works for nums = [1,2,3]
+
+Time complexity of O(N!xN).
+________________________________________________________________________________________________________________________________________________________________
 //2nd Approach - 
 
 C++ provides an in-built function called next_permutation() which directly returns the lexicographically next greater permutation of the input.
+
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        vector<vector<int>> ans;
+        sort(nums.begin(), nums.end());
+        do {
+            ans.push_back(nums);
+        } while (next_permutation(nums.begin(), nums.end()));
+        
+        for (int i = 0; i < ans.size(); i++) {
+            if (ans[i] == nums) {
+                if (i == ans.size() - 1) {
+                    sort(nums.begin(), nums.end());
+                }
+                else {
+                    nums = ans[i + 1];
+                }
+                break;
+            }
+        }
+    }
+};
+
+// This is showing wrong ans for some of the testcases like nums = [3,2,1]
+// But works for nums = [1,2,3]
+______________________________________________________________________________________________________________________________________________________________
 
 //3rd Approach
 

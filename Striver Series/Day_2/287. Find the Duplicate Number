@@ -1,11 +1,35 @@
 //Brute Force - Sort the array, then check if arr[i] == arr[i+1] ---O(nlogN)
 
+__________________________________________________________________________________________________________________________________________________
+
 //2nd Approach 
 // 1. Use frequency array assign everything by 0
 // 2. while traversing mark in array 1(as visited) so when we get another occurrence then we would already have marked 1 array
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        int n = nums.size();
+        
+        unordered_map<int,int> mp;
+        for(int i = 0; i < n; i++)
+            mp[nums[i]]++;
+        
+        for(int i = 0; i < n; i++){
+            if(mp[nums[i]] > 1){
+                return nums[i];
+            }
+        }
+        return 0;
+    }
+};
+
 //T.C - O(N)
 //S.C - O(N)
 
+__________________________________________________________________________________________________________________________________________________________
+
+// 3rd Approach
 
 Intuition: Since there is a duplicate number, we can always say that cycle will be formed.
 

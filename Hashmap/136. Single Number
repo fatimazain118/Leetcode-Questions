@@ -1,0 +1,48 @@
+// T.C - O(N)
+// S.C = O(N)
+// Using HashMap
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        unordered_map<int, int> map;
+
+        // for(int i=0; i<nums.size(); i++){
+        //     map[nums[i]]++;
+        // }
+
+        for(auto i : nums){
+            map[i]++;
+        }
+
+        for(auto j : map){
+            if(j.second == 1){       // hashmap is not a pointer so we don't use ->
+              return j.first;
+            }
+        }
+        return -1;
+    }
+};
+
+____________________________________________________________________________________________________
+
+// Using Bitwise Operator
+
+// A^A=0
+// A^B^A=B
+// (A^A^B) = (B^A^A) = (A^B^A) = B This shows that position doesn't matter.
+// Similarly , if we see , a^a^a......... (even times)=0 and a^a^a........(odd times)=a
+
+// T.C - O(N)
+// S.C = O(1)
+
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int ans = 0;
+        for(auto i: nums){
+           ans ^= i;
+        }
+        return ans;
+    }
+};

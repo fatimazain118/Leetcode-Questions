@@ -1,0 +1,53 @@
+// Brute Force
+// Neetcode
+
+class Solution {
+public:
+    vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success) {
+        vector<int> numsPair(spells.size(), 0);
+        
+        for(int i=0; i<spells.size(); i++){
+            //int spell = spells[i];
+            int count = 0;
+            for(auto j : potions){
+
+                long long product = (long long) spells[i] * (long long) j;
+                if(product >= success){
+                    count++;
+                } 
+            }
+            numsPair[i] = count;
+        }
+        return numsPair;
+    }
+};
+_______________________________________________________________________________________
+
+class Solution {
+public:
+    vector<int> successfulPairs(vector<int>& spells, vector<int>& potions, long long success) {
+        vector<int> numsPair;
+        sort(potions.begin(), potions.end());
+        
+        for(long long i=0; i<spells.size(); i++){
+          long long l = 0;
+          long long r = potions.size()-1;
+          long long idx = potions.size();
+
+          while(l <= r){
+            long long mid = l + (r-l)/2;
+            
+            // if(spells[i] * potions[mid] >= success){   this will give you runtime error
+            if(potions[mid] >= ceil(static_cast<double>(success) / spells[i])){
+                r = mid-1;
+                idx = mid;
+          }
+          else{
+            l = mid+1;
+          }
+        }
+        numsPair.push_back(potions.size() - idx);
+    }
+    return numsPair;
+    }
+};

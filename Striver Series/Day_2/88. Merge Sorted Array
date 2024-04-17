@@ -138,7 +138,7 @@ Space Complexity: O(1)
 ________________________________________________________________________________________
 //other
 
-Solution 3: Two Pointer approach
+Solution 3: Two Pointer approach (Algorithms Made Easy)
 class Solution {
 public:
     void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
